@@ -28,11 +28,7 @@ class ShopifyService(rx.State):
                 "read_script_tags",
                 "read_shipping",
                 "read_shopify_payments_payouts",
-                "read_subscription_orders",
                 "read_themes",
-                "read_users",
-                "read_webhooks",
-                "write_analytics",
                 "write_checkouts",
                 "write_customers",
                 "write_draft_orders",
@@ -43,11 +39,7 @@ class ShopifyService(rx.State):
                 "write_products",
                 "write_script_tags",
                 "write_shipping",
-                "write_shopify_payments_payouts",
-                "write_subscription_orders",
                 "write_themes",
-                "write_users",
-                "write_webhooks",
             ]
 
             scopes = ",".join(scopes)
