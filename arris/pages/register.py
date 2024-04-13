@@ -18,7 +18,7 @@ class RadixFormSubmissionState(rx.State):
         add_user(
             email=form_data["email"],
             full_name=form_data["name"],
-            password=pbkdf2_sha256.hash(form_data["user_password"]),
+            password=pbkdf2_sha256.hash(form_data["password"]),
         )
 
         # TODO: Use .env file for secret
@@ -91,7 +91,7 @@ def register() -> rx.Component:
                     direction="column",
                     spacing="2",
                 ),
-                name="user_password",
+                name="password",
             ),
             rx.form.submit(
                 rx.button("Submit"),
