@@ -9,4 +9,4 @@ class ClientStorageState(rx.State):
     )
 
     def logout(self):
-        return rx.remove_cookie("access_token")
+        yield [rx.remove_cookie("access_token"), rx.redirect("/login")]
