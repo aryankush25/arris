@@ -3,6 +3,7 @@ import reflex as rx
 from rxconfig import config
 import requests
 from fastapi.responses import RedirectResponse
+from arris.utils import ClientStorageState
 
 from arris.schemas.shopify_store import (
     get_store,
@@ -12,11 +13,10 @@ from arris.schemas.shopify_store import (
 )
 
 
-class ShopifyService(rx.State):
-    def install_app(self):
+class ShopifyService(ClientStorageState):
+    def install_app(self, shop: str):
         try:
-            shop = "xg-dev"
-            email = "ravi@gmail.com"
+            email = self.get_email()
             scopes = [
                 "read_products",
                 "read_orders",
