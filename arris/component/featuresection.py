@@ -1,4 +1,4 @@
-import reflex as rx
+import reflex as rx # type: ignore
 
 def featuresection() -> rx.Component:
     return rx.box(
@@ -9,7 +9,7 @@ def featuresection() -> rx.Component:
         rx.box(
             rx.text(
                 "Features",
-                class_name="text-white font-bold text-[32px]"
+                class_name="text-white font-bold text-5xl"
             ),
             rx.text(
                 "Strategic services drive digital success with tailored, comprehensive approaches.",
@@ -76,5 +76,5 @@ def featuresection() -> rx.Component:
         ),
         class_name="flex flex-col items-center mx-auto max-w-7xl w-full gap-12"
     ),
-    class_name="bg-[#5B9BF3] w-full mx-auto py-32",
+    class_name="bg-[#5B9BF3] w-full mx-auto mt-28 py-32",
 )
