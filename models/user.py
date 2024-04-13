@@ -6,7 +6,7 @@ class User(rx.Model, table=True):
     __tablename__ = "users"
 
     id: int = Field(default=None, primary_key=True)
-    username: str
+    username: str = Field(unique=True)
     full_name: str
     email: str = Field(unique=True)
     password: str
