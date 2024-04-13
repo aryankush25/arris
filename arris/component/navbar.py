@@ -1,4 +1,4 @@
-import reflex as rx
+import reflex as rx # type: ignore
 
 def navbar() -> rx.Component:
     return rx.box(
@@ -9,26 +9,26 @@ def navbar() -> rx.Component:
         rx.box(
             rx.box(
                 "Home",
-                class_name="font-medium text-gray-500"
+                class_name="font-medium text-lg text-gray-500"
             ),
             rx.box(
                 "Product",
-                class_name="font-medium text-gray-500"
+                class_name="font-medium text-lg text-gray-500"
             ),
             rx.box(
                 "About Us",
-                class_name="font-medium text-gray-500"
+                class_name="font-medium text-lg text-gray-500"
             ),
-            class_name="flex items-center gap-20"
+            class_name="flex items-center gap-16"
         ),
         rx.box(
             rx.box(
                 "Login",
-                class_name="text-gray-500 font-medium"
+                class_name="text-gray-500 text-lg font-medium"
             ),
             rx.box(
                 "Sign Up",
-                class_name="text-white py-2 px-[14px] bg-black rounded-md"
+                class_name="text-white text-lg py-2 px-[14px] bg-black rounded-md"
             ),
             class_name="flex gap-3 items-center"
         ),

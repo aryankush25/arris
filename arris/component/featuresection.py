@@ -13,9 +13,9 @@ def featuresection() -> rx.Component:
             ),
             rx.text(
                 "Strategic services drive digital success with tailored, comprehensive approaches.",
-                class_name="text-white font-medium text-xl backdrop-opacity-80"
+                class_name="text-white text-xl backdrop-opacity-80"
             ),
-            class_name="flex flex-col items-center gap-5"
+            class_name="flex flex-col items-center gap-3"
         ),
         rx.box(
             rx.box(
