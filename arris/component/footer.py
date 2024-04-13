@@ -4,6 +4,7 @@ def footer() -> rx.Component:
     return rx.box(
         rx.box(
             rx.box(
+            rx.box(
                 rx.box(
                 rx.image(
                    src="/play.png",
@@ -20,17 +21,17 @@ def footer() -> rx.Component:
             ),
             rx.box(
                 "Arris uses AI to generate working",
-                class_name="font-normal text-black text-base mt-4"
+                class_name="font-normal text-black text-sm mt-4"
             ),
             rx.box(
                 "Webpages without the hassle to code.",
-                class_name="font-normal text-black text-base"
+                class_name="font-normal text-black text-sm"
             ),
             ),
             rx.box(
                 rx.box(
                 "©2024 ARRIS, Inc.",
-                class_name="font-normal text-black text-base"
+                class_name="font-normal text-black text-sm"
             ),
             rx.box(
                 rx.image(
@@ -75,37 +76,37 @@ def footer() -> rx.Component:
             rx.box(
                 rx.box(
                     "AI Assistant",
-                    class_name="font-normal text-black text-base"
+                    class_name="font-normal text-black text-sm"
                     ),
             ),
             rx.box(
                 rx.box(
                     "CRM",
-                    class_name="font-normal text-black text-base"
+                    class_name="font-normal text-black text-sm"
                     ),
             ),
             rx.box(
                 rx.box(
                     "Invoicing",
-                    class_name="font-normal text-black text-base"
+                    class_name="font-normal text-black text-sm"
                     ),
             ),
             rx.box(
                 rx.box(
                     "Pricing",
-                    class_name="font-normal text-black text-base"
+                    class_name="font-normal text-black text-sm"
                     ),
             ),
             rx.box(
                 rx.box(
                     "Website builder",
-                    class_name="font-normal text-black text-base"
+                    class_name="font-normal text-black text-sm"
                     ),
             ),
             rx.box(
                 rx.box(
                     "Blog builder",
-                    class_name="font-normal text-black text-base"
+                    class_name="font-normal text-black text-sm"
                     ),
             ),
             class_name="flex flex-col gap-4 h-[315px]",
@@ -120,43 +121,43 @@ def footer() -> rx.Component:
             rx.box(
                 rx.box(
                     "Blog",
-                    class_name="font-normal text-black text-base"
+                    class_name="font-normal text-black text-sm"
                     ),
             ),
             rx.box(
                 rx.box(
                     "Perks",
-                    class_name="font-normal text-black text-base"
+                    class_name="font-normal text-black text-sm"
                     ),
             ),
             rx.box(
                 rx.box(
                     "State guides",
-                    class_name="font-normal text-black text-base"
+                    class_name="font-normal text-black text-sm"
                     ),
             ),
             rx.box(
                 rx.box(
                     "Industries",
-                    class_name="font-normal text-black text-base"
+                    class_name="font-normal text-black text-sm"
                     ),
             ),
             rx.box(
                 rx.box(
                     "Starter guides",
-                    class_name="font-normal text-black text-base"
+                    class_name="font-normal text-black text-sm"
                     ),
             ),
             rx.box(
                 rx.box(
                     "Website templates",
-                    class_name="font-normal text-black text-base"
+                    class_name="font-normal text-black text-sm"
                     ),
             ),
             rx.box(
                 rx.box(
                     "AI tools",
-                    class_name="font-normal text-black text-base"
+                    class_name="font-normal text-black text-sm"
                     ),
             ),
             class_name="flex flex-col gap-4 h-[315px]",
@@ -171,48 +172,50 @@ def footer() -> rx.Component:
             rx.box(
                 rx.box(
                     "About",
-                    class_name="font-normal text-black text-base"
+                    class_name="font-normal text-black text-sm"
                     ),
             ),
             rx.box(
                 rx.box(
                     "Affiliate program",
-                    class_name="font-normal text-black text-base"
+                    class_name="font-normal text-black text-sm"
                     ),
             ),
             rx.box(
                 rx.box(
                     "Careers",
-                    class_name="font-normal text-black text-base"
+                    class_name="font-normal text-black text-sm"
                     ),
             ),
             rx.box(
                 rx.box(
                     "Newsletter",
-                    class_name="font-normal text-black text-base"
+                    class_name="font-normal text-black text-sm"
                     ),
             ),
             rx.box(
                 rx.box(
                     "Privacy policy",
-                    class_name="font-normal text-black text-base"
+                    class_name="font-normal text-black text-sm"
                     ),
             ),
             rx.box(
                 rx.box(
                     "Support",
-                    class_name="font-normal text-black text-base"
+                    class_name="font-normal text-black text-sm"
                     ),
             ),
             rx.box(
                 rx.box(
                     "Terms of service",
-                    class_name="font-normal text-black text-base"
+                    class_name="font-normal text-black text-sm"
                     ),
             ),
             class_name="flex flex-col gap-4 h-[315px]",
         ),
         class_name="flex justify-between w-[60%]"
         ),
-        class_name="h-screen w-full flex justify-between mx-auto pt-10 max-w-7xl"
+        class_name="max-w-7xl flex w-full mx-auto"
+        ),
+        class_name="w-full flex bg-blue-200 bg-opactiy-70 mt-6 py-16"
     )
