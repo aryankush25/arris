@@ -3,8 +3,14 @@ import reflex as rx
 from rxconfig import config
 import httpx
 import requests
-import axios
-from arris.schemas.shopify_store import get_store, add_store, update_store, get_store_by_name
+from fastapi.responses import RedirectResponse, HTMLResponse
+
+from arris.schemas.shopify_store import (
+    get_store,
+    add_store,
+    update_store,
+    get_store_by_name,
+)
 
 
 class ShopifyService(rx.State):
@@ -45,13 +51,14 @@ class ShopifyService(rx.State):
         except Exception as error:
             print("Store Error", error)
 
+
 def shopifyOAuthCallback(code: str, shop: str, state: str):
     shopify_api_key = config.shopify_api_key
     shopify_api_secret = config.shopify_api_secret_key
-    
+
     # if code is None | shop is None | state is None:
     #     return "Missing code or shop or state parameter"
-    
+
     accessTokenUrl = f"https://{shop}/admin/oauth/access_token"
     accessParams = {
         "client_id": shopify_api_key,
@@ -61,25 +68,36 @@ def shopifyOAuthCallback(code: str, shop: str, state: str):
 
     try:
         # response = requests.post(accessTokenUrl, data=accessParams)
-        print("Access Token URL: ", accessTokenUrl, "Access Params: ", accessParams, "Shop: ", shop)
+        print(
+            "Access Token URL: ",
+            accessTokenUrl,
+            "Access Params: ",
+            accessParams,
+            "Shop: ",
+            shop,
+        )
         # response = await client.post(accessTokenUrl, data=accessParams)
         # response = httpx.post(accessTokenUrl, data=accessParams)
-        response = requests.post(accessTokenUrl, data=accessParams, headers={ 'Accept': 'application/json', 'Content-Type': 'application/json' })
+        response = requests.post(
+            accessTokenUrl,
+            data=accessParams,
+            headers={"Accept": "application/json", "Content-Type": "application/json"},
+        )
         # response.raise_for_status()
-        print(response.json(),"response")
+        print(response.json(), "response")
         access_token = response.json().get("access_token")
         store_name = shop.split(".")[0]
-        
+
         storeData = get_store_by_name(name=store_name)
         if not storeData:
             return "Store not found"
-        
+
         print("FOUND STORE: ", storeData)
         update_store(name=store_name, access_token=access_token)
         print("UPDATED ")
         print("DONE ASYNC")
-        # return "DONE"
-        yield [rx.redirect(f"https://google.com")]
+        return RedirectResponse("https://google.com", status_code=303)
+
     except Exception as error:
         print("OAuth Error", error)
     # async with httpx.AsyncClient() as client:
