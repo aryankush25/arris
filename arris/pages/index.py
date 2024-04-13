@@ -1,7 +1,7 @@
 # """The main index page."""
 
 import reflex as rx
-from arris.component.landing import herosection
+from arris.component.herosection import herosection
 from arris.component.navbar import navbar
 from arris.component.featuresection import featuresection
 from arris.component.footer import footer
