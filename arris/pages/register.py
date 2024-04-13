@@ -1,20 +1,30 @@
 import reflex as rx
 
 
-from arris.schemas.user import AddUser
+from arris.schemas.user import add_user
 
 
-# class RegisterState(rx.State):
-#     name: str = ""
-#     username: str = ""
-#     email: str = ""
-#     password: str = ""
+class RadixFormSubmissionState(rx.State):
+    form_data: dict
 
+    def handle_submit(self, form_data: dict):
+        """Handle the form submit."""
+        self.form_data = form_data
+        print(form_data)
 
-def handle_submit(form_data: dict):
-    # Your submission logic here
-    print(form_data.to_string())
-    return rx.window_alert("Form submitted successfully")
+        add_user(
+            email=form_data["email"],
+            full_name=form_data["name"],
+            password=form_data["user_password"],
+        )
+
+    @rx.var
+    def form_data_keys(self) -> list:
+        return list(self.form_data.keys())
+
+    @rx.var
+    def form_data_values(self) -> list:
+        return list(self.form_data.values())
 
 
 def register() -> rx.Component:
@@ -85,7 +95,19 @@ def register() -> rx.Component:
                 rx.button("Submit"),
                 as_child=True,
             ),
-            on_submit=handle_submit,
-            reset_on_submit=True,
+            on_submit=RadixFormSubmissionState.handle_submit,
         ),
+        # rx.divider(size="4"),
+        # rx.text(
+        #     "Results",
+        #     weight="bold",
+        # ),
+        # rx.foreach(
+        #     RadixFormSubmissionState.form_data_keys,
+        #     lambda key, idx: rx.text(
+        #         key,
+        #         " : ",
+        #         RadixFormSubmissionState.form_data_values[idx],
+        #     ),
+        # ),
     )
