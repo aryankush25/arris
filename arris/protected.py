@@ -32,18 +32,23 @@ def not_require_login(page: rx.app.ComponentCallable) -> rx.app.ComponentCallabl
 
 def protected() -> rx.Component:
 
-    return rx.chakra.vstack(
-        rx.chakra.heading("Protected Page", font_size="2em"),
+    return rx.fragment(
         rx.cond(
-            ClientStorageState.custom_cookie,
-            rx.fragment(
-                rx.chakra.link("Home", href="/"),
-                rx.button(
-                    "Logout",
-                    color_scheme="ruby",
-                    on_click=ClientStorageState.logout,
+            ClientStorageState.is_hydrated,
+            rx.cond(
+                ClientStorageState.custom_cookie,
+                rx.fragment(
+                    rx.chakra.link("Home", href="/"),
+                    rx.button(
+                        "Logout",
+                        color_scheme="ruby",
+                        on_click=ClientStorageState.logout,
+                    ),
                 ),
+                rx.chakra.link("Login", href="/login"),
             ),
-            rx.chakra.link("Login", href="/login"),
-        ),
+            rx.chakra.center(
+                rx.chakra.spinner(),
+            ),
+        )
     )
