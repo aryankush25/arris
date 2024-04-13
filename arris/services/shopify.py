@@ -96,7 +96,7 @@ def shopifyOAuthCallback(code: str, shop: str, state: str):
         update_store(name=store_name, access_token=access_token)
         print("UPDATED ")
         print("DONE ASYNC")
-        return RedirectResponse("https://google.com", status_code=303)
+        return RedirectResponse("http://localhost:3000/", status_code=303)
 
     except Exception as error:
         print("OAuth Error", error)
