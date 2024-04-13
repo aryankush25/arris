@@ -57,9 +57,11 @@ import reflex as rx
 
 
 # @template
+
+
 def index() -> rx.Component:
     return rx.box(
-        rx.box(
+        rx.box(rx.box(
             rx.box(
                 "ARRIS",
                 class_name="font-semibold text-[#5B9BF3] text-5xl"
@@ -84,7 +86,7 @@ def index() -> rx.Component:
             rx.box(
                 rx.box(
                     "Login",
-                    class_name="text-gray-500"
+                    class_name="text-gray-500 font-medium"
                 ),
                 rx.box(
                     "Sign Up",
@@ -94,7 +96,8 @@ def index() -> rx.Component:
             ),
             class_name="flex justify-between w-full mt-14"
         ),
-        class_name="h-screen w-full flex flex-col mx-auto max-w-7xl"
+        ),
+        class_name="h-screen w-full flex flex-col mx-auto max-w-7xl from-blue-100 bg-opacity-30 via-white to-blue-100 bg-gradient-to-r"
     )
 
 #     return rx.box(
