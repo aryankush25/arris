@@ -1,9 +1,9 @@
 """The main index page."""
 
 import reflex as rx
-from arris.navigation import navbar
 from arris.services.shopify import ShopifyService
 from arris.protected import require_login
+from arris.utils import ClientStorageState
 
 
 # @rx.page(on_load=IndexLoadState.get_data)
@@ -11,7 +11,11 @@ from arris.protected import require_login
 def index() -> rx.Component:
 
     return rx.box(
-        navbar(heading="Dashboard"),
+        rx.button(
+            "Logout",
+            color_scheme="ruby",
+            on_click=ClientStorageState.logout,
+        ),
         rx.button(
             "Decrement",
             color_scheme="ruby",
