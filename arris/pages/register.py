@@ -5,7 +5,7 @@ from arris.schemas.user import add_user
 from arris.protected import not_require_login
 
 
-class RadixFormSubmissionState(rx.State):
+class RadixFormSubmissionState(ClientStorageState):
     form_data: dict
 
     def handle_submit(self, form_data: dict):
@@ -16,7 +16,7 @@ class RadixFormSubmissionState(rx.State):
             password=pbkdf2_sha256.hash(form_data["password"]),
         )
 
-        encoded = ClientStorageState.generate_token(form_data["email"])
+        encoded = self.generate_token(form_data["email"])
 
         # jwt.decode(encoded, "secret", algorithms=["HS256"])
 
