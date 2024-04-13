@@ -23,7 +23,7 @@ class LoginRadixFormSubmissionState(rx.State):
         if user and pbkdf2_sha256.verify(form_data["password"], user.password):
             encoded = ClientStorageState.generate_token(form_data["email"])
 
-            yield [rx.redirect("/"), ClientStorageState.set_custom_cookie(encoded)]
+            yield [rx.redirect("/home"), ClientStorageState.set_custom_cookie(encoded)]
 
 
 @not_require_login

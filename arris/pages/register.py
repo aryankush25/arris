@@ -20,7 +20,7 @@ class RadixFormSubmissionState(rx.State):
 
         # jwt.decode(encoded, "secret", algorithms=["HS256"])
 
-        yield [rx.redirect("/"), ClientStorageState.set_custom_cookie(encoded)]
+        yield [rx.redirect("/home"), ClientStorageState.set_custom_cookie(encoded)]
 
 
 @not_require_login
