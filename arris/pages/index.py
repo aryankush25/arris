@@ -20,10 +20,14 @@ from arris.graphs import (
 from arris.navigation import navbar
 from arris.template import template
 
+from arris.schemas.user import AddUser
+
+
 # Content in a grid layout.
 
 
 def content_grid():
+
     return rx.chakra.grid(
         *[
             rx.chakra.grid_item(stat_card(*c), col_span=1, row_span=1)
@@ -54,12 +58,19 @@ def content_grid():
 
 @template
 def index() -> rx.Component:
+
     return rx.box(
-            navbar(heading="Dashboard"),
-            rx.box(
-                content_grid(),
-                margin_top="calc(50px + 2em)",
-                padding="2em",
-            ),
-            padding_left="250px",
-        )
+        navbar(heading="Dashboard"),
+        rx.button(
+            "Decrement",
+            color_scheme="ruby",
+            on_click=AddUser.add_user,
+        ),
+        rx.box(
+            content_grid(),
+            margin_top="calc(50px + 2em)",
+            padding="2em",
+        ),
+        padding_left="250px",
+        padding_top="100px",
+    )
