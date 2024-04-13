@@ -12,7 +12,4 @@ be_domain = os.environ.get("BE_DOMAIN", "http://localhost:8000")
 config = rx.Config(
     app_name="arris",
     db_url=database_url,
-    shopify_api_key=shopify_api_key,
-    shopify_api_secret_key=shopify_api_secret_key,
-    be_domain=be_domain,
 )

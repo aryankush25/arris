@@ -1,30 +1,37 @@
 import reflex as rx
 from models import ShopifyStores
 
-class ShopifyStoreRepo(rx.State):
-  store: ShopifyStores
-  stores: list[ShopifyStores]
 
-  def get_stores(self):
+def get_stores():
     with rx.session() as session:
-        self.stores = session.exec(ShopifyStores.select.all())
+        stores = session.exec(ShopifyStores.select.all())
+        return stores
 
-  def get_store(self):
-    with rx.session() as session:
-      self.store = session.exec(ShopifyStores.select.where(
-        (ShopifyStores.name == self.name) &
-        (ShopifyStores.is_app_installed == self.isAppInstall)
-    ))
 
-  def add_store(self):
+def get_store(name: str, is_app_installed: bool):
+    print("Store Request Body", name)
+    print("Store Request Body", is_app_installed)
     with rx.session() as session:
-      session.add(
-          ShopifyStores(
-            name=self.name,
-            state=self.state,
-            email=self.email,
-            access_token=self.access_token,
-            is_app_installed=self.is_app_installed,
-          )
-      )
+        store = session.exec(
+            ShopifyStores.select(ShopifyStores.name.contains(name)).all()
+        )
+
+        # users = session.exec(
+        #     User.select.where(User.email.contains()).all()
+        # )
+
+        return store
+
+
+def add_store(store: dict):
+    with rx.session() as session:
+        session.add(
+            ShopifyStores(
+                name=store.name,
+                state=store.state,
+                email=store.email,
+                access_token=store.access_token,
+                is_app_installed=store.is_app_installed,
+            )
+        )
     session.commit()

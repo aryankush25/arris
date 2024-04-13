@@ -64,7 +64,8 @@ def index() -> rx.Component:
         rx.button(
             "Decrement",
             color_scheme="ruby",
-            on_click=lambda: ShopifyService.install_app
+            on_click=ShopifyService.install_app,
+            # on_click=AddUser.add_user,
         ),
         rx.box(
             content_grid(),
