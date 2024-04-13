@@ -3,7 +3,7 @@ import reflex as rx
 from rxconfig import config
 import requests
 from fastapi.responses import RedirectResponse
-from arris.utils import ClientStorageState
+from arris.utils import ClientStorageState, scopes
 
 from arris.schemas.shopify_store import (
     get_store,
@@ -17,32 +17,9 @@ class ShopifyService(ClientStorageState):
     def install_app(self, shop: str):
         try:
             email = self.get_email()
-            scopes = [
-                "read_products",
-                "read_orders",
-                "read_analytics",
-                "read_orders",
-                "read_product_feeds",
-                "read_product_listings",
-                "read_products",
-                "read_script_tags",
-                "read_shipping",
-                "read_shopify_payments_payouts",
-                "read_themes",
-                "write_checkouts",
-                "write_customers",
-                "write_draft_orders",
-                "write_inventory",
-                "write_marketing_events",
-                "write_orders",
-                "write_price_rules",
-                "write_products",
-                "write_script_tags",
-                "write_shipping",
-                "write_themes",
-            ]
 
-            scopes = ",".join(scopes)
+            if not email:
+                return rx.redirect("/login")
 
             if not shop:
                 return "Shop parameter is missing"
@@ -66,8 +43,9 @@ class ShopifyService(ClientStorageState):
             be_domain = config.be_domain
             shopify_api_key = config.shopify_api_key
 
+            scopeString = ",".join(scopes)
             redirectUri = f"{be_domain}/oauth/callback"
-            authUrl = f"https://{shop}.myshopify.com/admin/oauth/authorize?client_id={shopify_api_key}&scope={scopes}&redirect_uri={redirectUri}&state={nonce}"
+            authUrl = f"https://{shop}.myshopify.com/admin/oauth/authorize?client_id={shopify_api_key}&scope={scopeString}&redirect_uri={redirectUri}&state={nonce}"
 
             print("Redirecting to: ", authUrl)
 
