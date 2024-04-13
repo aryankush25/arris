@@ -1,76 +1,91 @@
-"""The main index page."""
-
 import reflex as rx
-from arris.data import (
-    line_chart_data,
-    lines,
-    pie_chart_data,
-    area_chart_data,
-    areas,
-    stat_card_data,
-    tabular_data,
-)
-from arris.graphs import (
-    area_chart,
-    line_chart,
-    pie_chart,
-    stat_card,
-    table,
-)
-from arris.navigation import navbar
-from arris.template import template
+
 
 from arris.schemas.user import AddUser
 
 
-# Content in a grid layout.
+# class RegisterState(rx.State):
+#     name: str = ""
+#     username: str = ""
+#     email: str = ""
+#     password: str = ""
 
 
-def content_grid():
-
-    return rx.chakra.grid(
-        *[
-            rx.chakra.grid_item(stat_card(*c), col_span=1, row_span=1)
-            for c in stat_card_data
-        ],
-        rx.chakra.grid_item(
-            line_chart(data=line_chart_data, data_key="name", lines=lines),
-            col_span=3,
-            row_span=2,
-        ),
-        rx.chakra.grid_item(
-            pie_chart(data=pie_chart_data, data_key="value", name_key="name"),
-            row_span=2,
-            col_span=1,
-        ),
-        rx.chakra.grid_item(table(tabular_data=tabular_data), col_span=4, row_span=2),
-        rx.chakra.grid_item(
-            area_chart(data=area_chart_data, data_key="name", areas=areas),
-            col_span=3,
-            row_span=2,
-        ),
-        template_columns="repeat(4, 1fr)",
-        width="100%",
-        gap=4,
-        row_gap=8,
-    )
+def handle_submit(form_data: dict):
+    # Your submission logic here
+    print(form_data.to_string())
+    return rx.window_alert("Form submitted successfully")
 
 
-@template
 def register() -> rx.Component:
 
     return rx.box(
-        navbar(heading="Dashboard"),
-        rx.button(
-            "Decrement",
-            color_scheme="ruby",
-            on_click=AddUser.add_user,
+        rx.form.root(
+            rx.form.field(
+                rx.flex(
+                    rx.form.label("Full Name"),
+                    rx.form.control(
+                        rx.input.input(
+                            placeholder="Full Name",
+                            # type attribute is required for "typeMismatch" validation
+                            type="name",
+                        ),
+                        as_child=True,
+                    ),
+                    rx.form.message(
+                        "Please enter a valid full name",
+                        match="typeMismatch",
+                    ),
+                    direction="column",
+                    spacing="2",
+                ),
+                name="name",
+            ),
+            rx.form.field(
+                rx.flex(
+                    rx.form.label("Email"),
+                    rx.form.control(
+                        rx.input.input(
+                            placeholder="Email Address",
+                            # type attribute is required for "typeMismatch" validation
+                            type="email",
+                        ),
+                        as_child=True,
+                    ),
+                    rx.form.message(
+                        "Please enter a valid email",
+                        match="typeMismatch",
+                    ),
+                    direction="column",
+                    spacing="2",
+                ),
+                name="email",
+            ),
+            rx.form.field(
+                rx.flex(
+                    rx.form.label("Password"),
+                    rx.form.control(
+                        rx.input.input(
+                            placeholder="Enter your password",
+                            type="password",
+                            min_length=8,
+                        ),
+                        as_child=True,
+                    ),
+                    rx.form.message(
+                        "Please enter a password length >= 8",
+                        match="tooShort",
+                    ),
+                    direction="column",
+                    spacing="2",
+                ),
+                name="user_password",
+            ),
+            rx.form.submit(
+                rx.button("Submit"),
+                as_child=True,
+            ),
+            on_submit=handle_submit,
+            reset_on_submit=True,
         ),
-        rx.box(
-            content_grid(),
-            margin_top="calc(50px + 2em)",
-            padding="2em",
-        ),
-        padding_left="250px",
-        padding_top="100px",
     )
