@@ -1,9 +1,8 @@
 import random
 import reflex as rx
 from rxconfig import config
-import httpx
 import requests
-from fastapi.responses import RedirectResponse, HTMLResponse
+from fastapi.responses import RedirectResponse
 
 from arris.schemas.shopify_store import (
     get_store,
@@ -53,16 +52,13 @@ class ShopifyService(rx.State):
 
 
 def shopifyOAuthCallback(code: str, shop: str, state: str):
-    shopify_api_key = config.shopify_api_key
-    shopify_api_secret = config.shopify_api_secret_key
-
     # if code is None | shop is None | state is None:
     #     return "Missing code or shop or state parameter"
 
     accessTokenUrl = f"https://{shop}/admin/oauth/access_token"
     accessParams = {
-        "client_id": shopify_api_key,
-        "client_secret": shopify_api_secret,
+        "client_id": config.shopify_api_key,
+        "client_secret": config.shopify_api_secret_key,
         "code": code,
     }
 
@@ -79,7 +75,7 @@ def shopifyOAuthCallback(code: str, shop: str, state: str):
 
         update_store(name=store_name, access_token=access_token)
 
-        return RedirectResponse("http://localhost:3000/", status_code=303)
+        return RedirectResponse(config.fe_domain, status_code=303)
 
     except Exception as error:
         print("OAuth Error", error)

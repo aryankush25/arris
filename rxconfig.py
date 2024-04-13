@@ -1,6 +1,6 @@
 import os
 import reflex as rx
-from dotenv import dotenv_values  # type: ignore
+from dotenv import dotenv_values
 
 envConfig = dotenv_values()
 
@@ -11,4 +11,5 @@ config = rx.Config(
     shopify_api_key=envConfig["SHOPIFY_API_KEY"],
     shopify_api_secret_key=envConfig["SHOPIFY_API_SECRET_KEY"],
     be_domain=envConfig["BE_DOMAIN"],
+    fe_domain=envConfig["FE_DOMAIN"],
 )
