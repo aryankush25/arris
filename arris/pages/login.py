@@ -1,8 +1,9 @@
 import reflex as rx
 from passlib.hash import pbkdf2_sha256
-
 from arris.utils import ClientStorageState
 import jwt
+from rxconfig import config
+from arris.protected import not_require_login
 
 
 from arris.schemas.user import get_user
@@ -23,11 +24,12 @@ class LoginRadixFormSubmissionState(rx.State):
 
         if user and pbkdf2_sha256.verify(form_data["password"], user.password):
             encoded = jwt.encode(
-                {"some": form_data["email"]}, "secret", algorithm="HS256"
+                {"email": form_data["email"]}, config.jwt_secret, algorithm="HS256"
             )
             yield [rx.redirect("/"), ClientStorageState.set_custom_cookie(encoded)]
 
 
+@not_require_login
 def login() -> rx.Component:
 
     return rx.box(

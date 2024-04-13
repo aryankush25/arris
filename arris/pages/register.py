@@ -1,11 +1,9 @@
 import reflex as rx
 from passlib.hash import pbkdf2_sha256
-
 from arris.utils import ClientStorageState
 import jwt
-
-
 from arris.schemas.user import add_user
+from arris.protected import not_require_login
 
 
 class RadixFormSubmissionState(rx.State):
@@ -27,6 +25,7 @@ class RadixFormSubmissionState(rx.State):
         yield [rx.redirect("/"), ClientStorageState.set_custom_cookie(encoded)]
 
 
+@not_require_login
 def register() -> rx.Component:
 
     return rx.box(
