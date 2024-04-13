@@ -38,7 +38,11 @@ def protected() -> rx.Component:
             ClientStorageState.custom_cookie,
             rx.fragment(
                 rx.chakra.link("Home", href="/"),
-                rx.chakra.link("Logout", href="/", on_click=ClientStorageState.logout),
+                rx.button(
+                    "Logout",
+                    color_scheme="ruby",
+                    on_click=ClientStorageState.logout,
+                ),
             ),
             rx.chakra.link("Login", href="/login"),
         ),
