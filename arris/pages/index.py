@@ -1,6 +1,8 @@
 # """The main index page."""
 
 import reflex as rx
+from arris.component.landing import herosection
+
 # from arris.data import (
 #     line_chart_data,
 #     lines,
@@ -97,6 +99,7 @@ def index() -> rx.Component:
             ),
             class_name="flex justify-between w-full mt-14 max-w-7xl mx-auto"
         ),
+        herosection(),
         #features
         rx.box(
             rx.box(
