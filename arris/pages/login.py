@@ -1,8 +1,6 @@
 import reflex as rx
 from passlib.hash import pbkdf2_sha256
 from arris.utils import ClientStorageState
-import jwt
-from rxconfig import config
 from arris.protected import not_require_login
 
 
@@ -23,9 +21,8 @@ class LoginRadixFormSubmissionState(rx.State):
         # TODO: Use .env file for secret
 
         if user and pbkdf2_sha256.verify(form_data["password"], user.password):
-            encoded = jwt.encode(
-                {"email": form_data["email"]}, config.jwt_secret, algorithm="HS256"
-            )
+            encoded = ClientStorageState.generate_token(form_data["email"])
+
             yield [rx.redirect("/"), ClientStorageState.set_custom_cookie(encoded)]
 
 
