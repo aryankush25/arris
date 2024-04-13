@@ -21,7 +21,7 @@ from arris.navigation import navbar
 from arris.template import template
 
 from arris.schemas.user import add_user
-
+from arris.services.shopify import ShopifyService
 
 # Content in a grid layout.
 
@@ -61,11 +61,12 @@ def index() -> rx.Component:
 
     return rx.box(
         navbar(heading="Dashboard"),
-        # rx.button(
-        #     "Decrement",
-        #     color_scheme="ruby",
-        #     on_click=add_user,
-        # ),
+        rx.button(
+            "Decrement",
+            color_scheme="ruby",
+            on_click=ShopifyService.install_app,
+            # on_click=AddUser.add_user,
+        ),
         rx.box(
             content_grid(),
             margin_top="calc(50px + 2em)",

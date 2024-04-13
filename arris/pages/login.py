@@ -12,8 +12,6 @@ class LoginRadixFormSubmissionState(rx.State):
     form_data: dict
 
     def handle_submit(self, form_data: dict):
-        """Handle the form submit."""
-        print(form_data)
 
         user = get_user(
             email=form_data["email"],
