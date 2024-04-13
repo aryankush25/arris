@@ -20,34 +20,10 @@ from arris.graphs import (
 from arris.navigation import navbar
 from arris.template import template
 
-from models import User
+from arris.schemas.user import AddUser
+
 
 # Content in a grid layout.
-
-
-class QueryUser(rx.State):
-    name: str
-    users: list[User]
-
-    def get_users(self):
-        with rx.session() as session:
-            self.users = session.exec(
-                User.select.where(User.username.contains(self.name)).all()
-            )
-
-
-class AddUser(rx.State):
-    def add_user(self):
-        with rx.session() as session:
-            session.add(
-                User(
-                    username="aryan",
-                    email="aryan@gluelabs.com",
-                    full_name="Aryan",
-                    password="1234",
-                )
-            )
-            session.commit()
 
 
 def content_grid():
