@@ -5,7 +5,7 @@ def templates() -> rx.Component:
         rx.box(
             rx.box(
                 "Some of our Templates",
-                class_name="font-bold text-base"
+                class_name="font-semibold text-[32px] text-[#4193F3]"
             ),
             rx.box(
             rx.box(
@@ -34,11 +34,7 @@ def templates() -> rx.Component:
             ),
             class_name="flex justify-between gap-2"
         ),
-        rx.box(
-            "explore more..",
-            class_name="font-normal text-base text-decoration-line: underline text-[#4193F3]"
-            ),
-        class_name="flex flex-col gap-2 justify-center items-center"
+        class_name="flex flex-col gap-16 justify-center items-center"
         ),
-        class_name="flex justify-between w-full mt-14 max-w-7xl mx-auto"
+        class_name="flex justify-between w-full mt-20 max-w-7xl mx-auto"
     )

@@ -13,8 +13,8 @@ def index() -> rx.Component:
         navbar(),
         herosection(),
         featuresection(),
+        templates(),
         reviewsection(),
         footer(),
-        templates(),
         class_name="min-h-screen w-full flex flex-col from-blue-100 bg-opacity-30 via-white to-blue-100 bg-gradient-to-r"
     )
