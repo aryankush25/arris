@@ -5,54 +5,35 @@ from arris.utils import ClientStorageState
 import jwt
 
 
-from arris.schemas.user import add_user
+from arris.schemas.user import get_user
 
 
-class RadixFormSubmissionState(rx.State):
+class LoginRadixFormSubmissionState(rx.State):
     form_data: dict
 
     def handle_submit(self, form_data: dict):
         """Handle the form submit."""
         print(form_data)
 
-        add_user(
+        user = get_user(
             email=form_data["email"],
-            full_name=form_data["name"],
-            password=pbkdf2_sha256.hash(form_data["password"]),
         )
 
+        user.password
+
         # TODO: Use .env file for secret
-        encoded = jwt.encode({"some": form_data["email"]}, "secret", algorithm="HS256")
 
-        # jwt.decode(encoded, "secret", algorithms=["HS256"])
+        if user and pbkdf2_sha256.verify(form_data["password"], user.password):
+            encoded = jwt.encode(
+                {"some": form_data["email"]}, "secret", algorithm="HS256"
+            )
+            yield [rx.redirect("/"), ClientStorageState.set_custom_cookie(encoded)]
 
-        yield [rx.redirect("/"), ClientStorageState.set_custom_cookie(encoded)]
 
-
-def register() -> rx.Component:
+def login() -> rx.Component:
 
     return rx.box(
         rx.form.root(
-            rx.form.field(
-                rx.flex(
-                    rx.form.label("Full Name"),
-                    rx.form.control(
-                        rx.input.input(
-                            placeholder="Full Name",
-                            # type attribute is required for "typeMismatch" validation
-                            type="name",
-                        ),
-                        as_child=True,
-                    ),
-                    rx.form.message(
-                        "Please enter a valid full name",
-                        match="typeMismatch",
-                    ),
-                    direction="column",
-                    spacing="2",
-                ),
-                name="name",
-            ),
             rx.form.field(
                 rx.flex(
                     rx.form.label("Email"),
@@ -97,6 +78,6 @@ def register() -> rx.Component:
                 rx.button("Submit"),
                 as_child=True,
             ),
-            on_submit=RadixFormSubmissionState.handle_submit,
+            on_submit=LoginRadixFormSubmissionState.handle_submit,
         ),
     )
