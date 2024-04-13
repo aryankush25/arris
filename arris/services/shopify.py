@@ -17,7 +17,40 @@ class ShopifyService(rx.State):
         try:
             shop = "xg-dev"
             email = "ravi@gmail.com"
-            scopes = "read_products,read_orders,read_analytics,read_orders,read_product_feeds,read_product_listings,read_products"
+            scopes = [
+                "read_products",
+                "read_orders",
+                "read_analytics",
+                "read_orders",
+                "read_product_feeds",
+                "read_product_listings",
+                "read_products",
+                "read_script_tags",
+                "read_shipping",
+                "read_shopify_payments_payouts",
+                "read_subscription_orders",
+                "read_themes",
+                "read_users",
+                "read_webhooks",
+                "write_analytics",
+                "write_checkouts",
+                "write_customers",
+                "write_draft_orders",
+                "write_inventory",
+                "write_marketing_events",
+                "write_orders",
+                "write_price_rules",
+                "write_products",
+                "write_script_tags",
+                "write_shipping",
+                "write_shopify_payments_payouts",
+                "write_subscription_orders",
+                "write_themes",
+                "write_users",
+                "write_webhooks",
+            ]
+
+            scopes = ",".join(scopes)
 
             if not shop:
                 return "Shop parameter is missing"
