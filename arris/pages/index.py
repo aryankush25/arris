@@ -1,12 +1,9 @@
 """The main index page."""
 
 import reflex as rx
-from arris.protected import require_login
 from arris.utils import ClientStorageState
 
 
-# @rx.page(on_load=IndexLoadState.get_data)
-@require_login
 def index() -> rx.Component:
 
     return rx.box(
