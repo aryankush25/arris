@@ -1,6 +1,6 @@
 import random
 import reflex as rx
-from rxconfig import shopify_api_key, be_domain
+from rxconfig import config
 from arris.schemas.shopify_store import get_store, add_store
 
 
@@ -30,7 +30,10 @@ class ShopifyService(rx.State):
             if storeData != None and storeData.is_app_installed:
                 return "App already installed"
 
-            redirectUri = f"{be_domain}/shopify/oauth/callback"
+            be_domain = config.be_domain
+            shopify_api_key = config.shopify_api_key
+
+            redirectUri = f"{be_domain}/oauth/callback"
             authUrl = f"https://{shop}.myshopify.com/admin/oauth/authorize?client_id={shopify_api_key}&scope={scopes}&redirect_uri={redirectUri}&state={nonce}"
 
             print("Redirecting to: ", authUrl)
