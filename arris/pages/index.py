@@ -20,7 +20,7 @@ from arris.graphs import (
 from arris.navigation import navbar
 from arris.template import template
 
-from arris.schemas.user import AddUser
+from arris.schemas.user import add_user
 from arris.services.shopify import ShopifyService
 
 # Content in a grid layout.
