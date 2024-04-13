@@ -2,7 +2,7 @@
 
 from rxconfig import config
 
-import reflex as rx
+import reflex as rx # type: ignore
 
 from arris.styles import BACKGROUND_COLOR, FONT_FAMILY, THEME, STYLESHEETS
 

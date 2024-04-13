@@ -15,4 +15,5 @@ config = rx.Config(
     shopify_api_secert_key=config["SHOPIFY_API_SECRET_KEY"]
 )
 
+
 print(config.db_url)
