@@ -1,7 +1,6 @@
 """The main index page."""
 
 import reflex as rx
-from arris.services.shopify import ShopifyService
 from arris.protected import require_login
 from arris.utils import ClientStorageState
 
@@ -19,8 +18,6 @@ def index() -> rx.Component:
         rx.button(
             "Decrement",
             color_scheme="ruby",
-            on_click=ShopifyService.install_app,
-            # on_click=AddUser.add_user,
         ),
         rx.box(
             margin_top="calc(50px + 2em)",
