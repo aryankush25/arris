@@ -1,4 +1,8 @@
 import reflex as rx
+from passlib.hash import pbkdf2_sha256
+
+from arris.utils import ClientStorageState
+import jwt
 
 
 from arris.schemas.user import add_user
@@ -9,22 +13,20 @@ class RadixFormSubmissionState(rx.State):
 
     def handle_submit(self, form_data: dict):
         """Handle the form submit."""
-        self.form_data = form_data
         print(form_data)
 
         add_user(
             email=form_data["email"],
             full_name=form_data["name"],
-            password=form_data["user_password"],
+            password=pbkdf2_sha256.hash(form_data["user_password"]),
         )
 
-    @rx.var
-    def form_data_keys(self) -> list:
-        return list(self.form_data.keys())
+        # TODO: Use .env file for secret
+        encoded = jwt.encode({"some": form_data["email"]}, "secret", algorithm="HS256")
 
-    @rx.var
-    def form_data_values(self) -> list:
-        return list(self.form_data.values())
+        # jwt.decode(encoded, "secret", algorithms=["HS256"])
+
+        yield [rx.redirect("/"), ClientStorageState.set_custom_cookie(encoded)]
 
 
 def register() -> rx.Component:
@@ -97,17 +99,4 @@ def register() -> rx.Component:
             ),
             on_submit=RadixFormSubmissionState.handle_submit,
         ),
-        # rx.divider(size="4"),
-        # rx.text(
-        #     "Results",
-        #     weight="bold",
-        # ),
-        # rx.foreach(
-        #     RadixFormSubmissionState.form_data_keys,
-        #     lambda key, idx: rx.text(
-        #         key,
-        #         " : ",
-        #         RadixFormSubmissionState.form_data_values[idx],
-        #     ),
-        # ),
     )
