@@ -67,24 +67,9 @@ def shopifyOAuthCallback(code: str, shop: str, state: str):
     }
 
     try:
-        # response = requests.post(accessTokenUrl, data=accessParams)
-        print(
-            "Access Token URL: ",
-            accessTokenUrl,
-            "Access Params: ",
-            accessParams,
-            "Shop: ",
-            shop,
-        )
-        # response = await client.post(accessTokenUrl, data=accessParams)
-        # response = httpx.post(accessTokenUrl, data=accessParams)
-        response = requests.post(
-            accessTokenUrl,
-            data=accessParams,
-            headers={"Accept": "application/json", "Content-Type": "application/json"},
-        )
-        # response.raise_for_status()
-        print(response.json(), "response")
+
+        response = requests.post(accessTokenUrl, data=accessParams)
+
         access_token = response.json().get("access_token")
         store_name = shop.split(".")[0]
 
@@ -92,12 +77,9 @@ def shopifyOAuthCallback(code: str, shop: str, state: str):
         if not storeData:
             return "Store not found"
 
-        print("FOUND STORE: ", storeData)
         update_store(name=store_name, access_token=access_token)
-        print("UPDATED ")
-        print("DONE ASYNC")
+
         return RedirectResponse("http://localhost:3000/", status_code=303)
 
     except Exception as error:
         print("OAuth Error", error)
-    # async with httpx.AsyncClient() as client:
