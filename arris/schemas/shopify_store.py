@@ -1,8 +1,6 @@
-from cgitb import text
 import reflex as rx
-from models import ShopifyStores, User
+from models import ShopifyStores
 from sqlmodel import select
-
 
 def get_stores():
     with rx.session() as session:

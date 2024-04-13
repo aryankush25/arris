@@ -88,7 +88,6 @@ def shopifyOAuthCallback(code: str, shop: str, state: str):
     }
 
     try:
-
         response = requests.post(accessTokenUrl, data=accessParams)
 
         access_token = response.json().get("access_token")
