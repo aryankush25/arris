@@ -2,7 +2,7 @@ import os
 import reflex as rx
 
 database_url = os.environ.get(
-    "DATABASE_URL", "postgresql://postgres:postgres@localhost:5432/arris"
+    "DATABASE_URL", "postgresql://postgres:1336@localhost:5432/arris"
 )
 
 
