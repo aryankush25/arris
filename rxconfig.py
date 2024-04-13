@@ -13,5 +13,5 @@ config = rx.Config(
     db_url=config["DATABASE_URL"],
     shopify_api_key = config["SHOPIFY_API_KEY"],
     shopify_api_secret_key = config["SHOPIFY_API_SECRET_KEY"],
-    be_domain = config["BE_DOMAIN"],
+    be_domain = "https://ed9e-112-196-47-10.ngrok-free.app",
 )

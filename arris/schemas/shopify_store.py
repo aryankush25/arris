@@ -21,6 +21,27 @@ def get_store(name: str, is_app_installed: bool):
 
         return store
 
+def get_store_by_name(name: str):
+    with rx.session() as session:
+        store = session.exec(
+            select(ShopifyStores).where(ShopifyStores.name == name)
+        ).first()
+
+        return store
+
+def update_store(name: str, access_token: str):
+    print("Updating store: ", name, " with access token: ", access_token)
+    
+    with rx.session() as session:
+        store = session.exec(
+            select(ShopifyStores).where(ShopifyStores.name == name)
+        ).first()
+        
+        print("Store: ", store)
+        store.access_token = access_token
+        store.is_app_installed = True
+        session.add(store)
+        session.commit()
 
 def add_store(
     name: str,
