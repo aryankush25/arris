@@ -9,6 +9,7 @@ from arris.pages.register import register
 from arris.services.shopify import shopifyOAuthCallback
 from arris.services.shopify_theme import createStoreTheme, updateStoreTheme, getStoreThemes, getStoreThemeById
 from arris.pages.login import login
+from arris.pages.home import home
 
 
 # Create app instance and add index page.
@@ -20,6 +21,7 @@ app = rx.App(
 app.add_page(index, route="/")
 app.add_page(login, route="/login")
 app.add_page(register, route="/register")
+app.add_page(home, route="/home")
 app.api.add_api_route("/oauth/callback/", shopifyOAuthCallback)
 app.api.add_api_route("shopify/theme/create", createStoreTheme, methods=["POST"])
 app.api.add_api_route("shopify/theme/update/{id}", updateStoreTheme, methods=["PUT"])
