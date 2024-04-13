@@ -1,5 +1,7 @@
+from cgitb import text
 import reflex as rx
-from models import ShopifyStores
+from models import ShopifyStores, User
+from sqlmodel import select
 
 
 def get_stores():
@@ -9,29 +11,33 @@ def get_stores():
 
 
 def get_store(name: str, is_app_installed: bool):
-    print("Store Request Body", name)
-    print("Store Request Body", is_app_installed)
     with rx.session() as session:
         store = session.exec(
-            ShopifyStores.select(ShopifyStores.name.contains(name)).all()
-        )
-
-        # users = session.exec(
-        #     User.select.where(User.email.contains()).all()
-        # )
+            select(ShopifyStores).where(
+                ShopifyStores.name.contains(name) & ShopifyStores.is_app_installed
+                == is_app_installed
+            )
+        ).first()
 
         return store
 
 
-def add_store(store: dict):
+def add_store(
+    name: str,
+    email: str,
+    state: str,
+    access_token: str,
+    is_app_installed: bool,
+):
+
     with rx.session() as session:
         session.add(
             ShopifyStores(
-                name=store.name,
-                state=store.state,
-                email=store.email,
-                access_token=store.access_token,
-                is_app_installed=store.is_app_installed,
+                name=name,
+                state=state,
+                email=email,
+                access_token=access_token,
+                is_app_installed=is_app_installed,
             )
         )
-    session.commit()
+        session.commit()

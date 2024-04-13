@@ -1,5 +1,4 @@
 import random
-import requests
 import reflex as rx
 from rxconfig import shopify_api_key, be_domain
 from arris.schemas.shopify_store import get_store, add_store
@@ -15,23 +14,27 @@ class ShopifyService(rx.State):
             if not shop:
                 return "Shop parameter is missing"
 
-            print("Store Request Body", shop, email, shopify_api_key)
-
             storeData = get_store(name=shop, is_app_installed=True)
 
-            print("Store Data", storeData)
+            nonce = random.getrandbits(64)
 
-            if not storeData:
-                add_store({"shop": shop, "email": email})
+            if storeData is None:
+                add_store(
+                    name=shop,
+                    email=email,
+                    state=nonce,
+                    access_token=None,
+                    is_app_installed=False,
+                )
 
-            if storeData != None and storeData.is_app_install:
+            if storeData != None and storeData.is_app_installed:
                 return "App already installed"
 
-            nonce = random.getrandbits(64)
             redirectUri = f"{be_domain}/shopify/oauth/callback"
             authUrl = f"https://{shop}.myshopify.com/admin/oauth/authorize?client_id={shopify_api_key}&scope={scopes}&redirect_uri={redirectUri}&state={nonce}"
 
-            response = {"authUrl": authUrl}
-            return response
+            print("Redirecting to: ", authUrl)
+
+            return rx.redirect(authUrl)
         except Exception as error:
             print("Store Error", error)
