@@ -1,6 +1,6 @@
 # """The main index page."""
 
-import reflex as rx
+import reflex as rx # type: ignore
 from arris.component.herosection import herosection
 from arris.component.navbar import navbar
 from arris.component.featuresection import featuresection
