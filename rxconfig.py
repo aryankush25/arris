@@ -9,7 +9,7 @@ config = rx.Config(
     db_url=envConfig["DATABASE_URL"],
     shopify_api_key=envConfig["SHOPIFY_API_KEY"],
     shopify_api_secret_key=envConfig["SHOPIFY_API_SECRET_KEY"],
-    be_domain="https://ed9e-112-196-47-10.ngrok-free.app",
+    be_domain="https://acfb-112-196-47-10.ngrok-free.app",
     fe_domain=envConfig["FE_DOMAIN"],
     jwt_secret=envConfig["JWT_SECRET"],
 )
