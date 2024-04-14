@@ -1,5 +1,6 @@
 import reflex as rx
 from arris.services.shopify import get_store
+from arris.protected import require_login
 from arris.services.shopify_page import ShopifyPageService
 
 
@@ -35,6 +36,7 @@ class BuilderState(rx.State):
 
 
 @rx.page(on_load=BuilderState.get_data)
+@require_login
 def builder():
     return rx.box(
         rx.heading("Builder Page"),
