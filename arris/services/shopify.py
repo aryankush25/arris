@@ -112,3 +112,34 @@ def shopifyOAuthCallback(
             f"{config.fe_domain}/home?error=oauth_error?error={error}",
             status_code=303,
         )
+
+def get_shopify_products(store_name: str):
+    try:
+        store_data = get_store_by_name(name=store_name)
+
+        if store_data == None:
+            return rx.window_alert("Store not found")
+
+        shop_url = f"{store_name}.myshopify.com"
+
+        if store_name.startswith("https://") or store_name.startswith("http://"):
+            shop_url = store_name.split("/")[2]
+        elif shop_url.endswith(".myshopify.com"):
+            shop_url = store_name
+
+        shopify.Session.setup(
+            api_key=config.shopify_api_key, secret=config.shopify_api_secret_key
+        )
+
+        session = shopify.Session(
+            f"{store_data['name']}.myshopify.com", api_version, store_data["access_token"]
+        )
+
+        shopify.ShopifyResource.activate_session(session)
+
+        products = shopify.Product.find()
+
+        return products
+    except Exception as error:
+        print("Store Error", error)
+        return rx.window_alert(f"Store Error {error}")
