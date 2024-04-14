@@ -2,10 +2,17 @@ import reflex as rx
 from arris.services.shopify_page import ShopifyPageService
 from arris.protected import require_login
 from arris.utils import ClientStorageState
+from arris.schemas.shopify_store import get_stores
+from typing import List
 
 
-class ShopifyRadixFormSubmissionState(rx.State):
-    form_data: dict
+class HomeState(ClientStorageState):
+    data: List[dict] = []
+
+    def get_data(self):
+        email = self.get_email()
+
+        self.data = get_stores(email)
 
     def handle_submit(self, form_data: dict):
         return ShopifyService.install_app(form_data["store_name"])
@@ -14,6 +21,7 @@ def createPage():
     return ShopifyPageService.craete_page("xg-dev", "ISHITA", "<h1>ARRIS</h1>")
 
 
+@rx.page(on_load=HomeState.get_data)
 @require_login
 def home() -> rx.Component:
 
@@ -52,7 +60,25 @@ def home() -> rx.Component:
                 rx.button("Connect Shopify"),
                 as_child=True,
             ),
-            on_submit=ShopifyRadixFormSubmissionState.handle_submit,
+            on_submit=HomeState.handle_submit,
+        ),
+        rx.box(
+            rx.text("Stores"),
+            padding_left="250px",
+            padding_top="100px",
+        ),
+        rx.foreach(
+            HomeState.data,
+            lambda store, index: rx.box(
+                rx.text(index + 1),
+                rx.text(store["name"]),
+                rx.chakra.link(
+                    "Go to builder ->",
+                    href=f"/builder/{store['name']}",
+                ),
+                padding_left="250px",
+                class_name="border border-gray",
+            ),
         ),
         # rx.button(
         #     "Test Page",

@@ -38,7 +38,7 @@ def protected() -> rx.Component:
             rx.cond(
                 ClientStorageState.custom_cookie,
                 rx.fragment(
-                    rx.chakra.link("Home", href="/"),
+                    rx.chakra.link("Home", href="/home"),
                     rx.button(
                         "Logout",
                         color_scheme="ruby",

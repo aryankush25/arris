@@ -2,6 +2,11 @@
 
 This is a Reflex starter template for a dashboard app.
 
+## How to install
+
+1. Setup virtual environment
+2. Execute `pip install -r requirements.txt`
+
 ## How to setup database
 
 1. Create a new file in `/models`.
