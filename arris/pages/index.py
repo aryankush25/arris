@@ -8,6 +8,7 @@ from arris.component.footer import footer
 from arris.component.reviewsection import reviewsection
 from arris.component.template import templates
 from arris.component.benefitsection import benefitssection
+from arris.component.videosection import videosection
 
 def index() -> rx.Component:
     return rx.box(
@@ -15,6 +16,7 @@ def index() -> rx.Component:
         herosection(),
         featuresection(),
         templates(),
+        videosection(),
         benefitssection(),
         reviewsection(),
         footer(),
