@@ -69,3 +69,11 @@ def get_email_from_token(jwt_token: str):
     )
 
     return payload["email"]
+
+
+def get_store_url(store_name: str):
+    if store_name.startswith("https://") or store_name.startswith("http://"):
+        return store_name.split("/")[2]
+    elif store_name.endswith(".myshopify.com"):
+        return store_name
+    return f"{store_name}.myshopify.com"
