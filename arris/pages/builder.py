@@ -114,7 +114,12 @@ def builder() -> rx.Component:
                 rx.text("ARRIS", class_name="text-2xl font-bold text-black"),
                 class_name="w-full flex gap-2 items-center",
             ),
-            rx.heading(BuilderState.data["name"],class_name="text-lg text-gray-500 font-semibold border py-2 rounded-lg px-4"),
+            rx.heading(
+            rx.image(
+                src="/back_arrow.svg"
+            ),
+            BuilderState.data["name"],
+            class_name="text-black font-medium flex items-center gap-2 cursor-pointer py-2 px-4"),
             class_name="flex flex-col gap-1"
             ),
             rx.cond(
