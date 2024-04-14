@@ -114,11 +114,6 @@ def builder() -> rx.Component:
                     rx.text("ARRIS", class_name="text-2xl font-bold text-black"),
                     class_name="w-full flex gap-2 items-center",
                 ),
-                rx.heading(
-                    rx.image(src="/back_arrow.svg"),
-                    BuilderState.data["name"],
-                    class_name="text-black font-medium flex items-center gap-2 cursor-pointer py-2 px-4",
-                ),
                 class_name="flex flex-col gap-1",
             ),
             rx.cond(
@@ -239,24 +234,48 @@ def builder() -> rx.Component:
                     ),
                 ),
             ),
-            class_name="flex w-full mt-16 justify-between items-center",
+            class_name="flex w-full mt-12 justify-between items-center",
         ),
         rx.box(
-            rx.foreach(
-                BuilderState.pages,
-                lambda page, index: rx.box(
-                    rx.text(index + 1),
-                    rx.text(page["title"]),
-                    rx.html(page["body_html"]),
-                    rx.chakra.link(
-                        "Go to builder page ->",
-                        href=f"/builder/{BuilderState.store_name}/{page['id']}",
-                    ),
-                    padding_left="250px",
-                    class_name="border border-gray max-w-[550px] w-full",
-                ),
+            rx.image(
+                src="/back_arrow.svg",
+                alt="Descriptive text about the image",
+                height="25px",
+                width="25px",
             ),
-            class_name="flex gap-6 px-4 md:px-0 flex-col mx-auto md:flex-row items-center",
+            rx.text(
+                BuilderState.data["name"],
+                class_name="text-xl font-bold text-black",
+            ),
+            class_name="flex gap-4 items-center cursor-pointer",
+            on_click=lambda: rx.redirect(f"/home"),
         ),
-        class_name="max-w-7xl flex-col flex gap-20 mx-auto h-screen w-full",
+        rx.cond(
+            BuilderState.pages == [],
+            rx.text("No pages found"),
+            rx.box(
+                rx.foreach(
+                    BuilderState.pages,
+                    lambda page: rx.box(
+                        rx.box(
+                            rx.text(
+                                page["title"],
+                                class_name="text-lg font-bold flex-1",
+                            ),
+                            rx.chakra.link(
+                                "View pages",
+                                href=f"/builder/{BuilderState.store_name}/{page['id']}",
+                                color="#4193F3",
+                                display="flex",
+                            ),
+                            class_name="flex justify-between items-center gap-4",
+                        ),
+                        rx.html(page["body_html"]),
+                        class_name="border border-gray w-[400px] p-4 h-[400px] overflow-y-auto flex flex-col gap-4",
+                    ),
+                ),
+                class_name="flex gap-6 px-4 md:px-0 flex-col mx-auto md:flex-row items-center flex-wrap justify-start pb-16",
+            ),
+        ),
+        class_name="max-w-7xl flex-col flex gap-6 mx-auto h-screen w-full px-4",
     )
