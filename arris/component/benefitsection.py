@@ -65,7 +65,7 @@ def benefitssection() -> rx.Component:
                 src="/benefits.svg",
                 class_name="hidden md:block max-w-lg"
             ),
-            class_name="flex w-full items-center justify-between"
+            class_name="flex w-full items-center justify-center md:justify-between"
         ),
         class_name="max-w-7xl mt-20 md:mt-28 w-full mx-auto flex flex-col items-center px-4 gap-8"
     )

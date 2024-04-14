@@ -18,6 +18,8 @@ def herosection() -> rx.Component:
                     rx.image(
                         src="/line.png",
                         alt="Descriptive text about the image",
+                        width="70%",
+                        class_name="mx-auto md:mx-0"
                     ),
                     class_name="flex flex-col gap-1 font-bold text-[rgba(21, 23, 26, 1)] text-5xl md:text-7xl"
                 ),
@@ -54,7 +56,7 @@ def herosection() -> rx.Component:
                                   ),
                         class_name="flex gap-1 items-center"
                     ),
-                    class_name="flex gap-4 mt-6 justify center md:justify-start"
+                    class_name="flex gap-4 mt-6 justify-center md:justify-start"
                 ),
                 class_name="flex flex-col gap-2"
             ),
@@ -62,9 +64,9 @@ def herosection() -> rx.Component:
                 rx.image(
                     src="/cuate.png",
                     alt="Descriptive text about the image",
-                    class_name="max-w-lg w-full"
+                    class_name="md:max-w-lg max-w-xl w-full"
                 ),
                 class_name="flex w-[50%] mt-4 justify-end h-[370px] max-h-[560px] h-full"
             ),
-            class_name="flex flex-col md:flex-row px-4 gap-40 md:gap-0 justify-between w-full mt-16 text-center md:text-left items-center md:mt-28 max-w-7xl mx-auto"
+            class_name="flex flex-col md:flex-row px-4 gap-20 md:gap-0 justify-between w-full mt-16 text-center md:text-left items-center md:mt-28 max-w-7xl mx-auto"
         )
