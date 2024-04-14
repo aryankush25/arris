@@ -51,7 +51,6 @@ class ShopifyPageService(ClientStorageState):
                 store_id=store_data.id,
             )
 
-            return rx.window_alert("Page created")
         except Exception as error:
             print("Create Page Error", error)
         finally:
