@@ -20,6 +20,15 @@ def get_store_page_by_id(id: int):
         return shopifyPage
 
 
+def get_store_page_by_page_id(page_id: str):
+    with rx.session() as session:
+        shopifyPage = session.exec(
+            select(ShopifyPage).where(ShopifyPage.page_id == page_id)
+        ).first()
+
+        return shopifyPage
+
+
 def update_store_page(id: int, body_html: str):
     with rx.session() as session:
         shopifyPage = session.exec(

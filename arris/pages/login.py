@@ -7,8 +7,10 @@ from arris.protected import not_require_login
 from arris.schemas.user import get_user
 
 EMAIL_REGEX = r"(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)"
+
+
 class LoginState(ClientStorageState):
-    is_loading= False
+    is_loading = False
     form_data: dict
 
     def validate_email(self, email: str) -> bool:
@@ -56,7 +58,8 @@ def login() -> rx.Component:
                     width="45px",
                 ),
                 rx.text("ARRIS", font_family="Integral CF", class_name="text-2xl font-bold text-black"),
-                class_name="w-full flex gap-2 justify-center items-center",
+                class_name="w-full flex gap-2 justify-center items-center cursor-pointer",
+                on_click=lambda: rx.redirect("/"),
             ),
             rx.form.root(
                 rx.box(
@@ -116,18 +119,18 @@ def login() -> rx.Component:
                 rx.form.submit(
                     rx.button(
                         rx.cond(LoginState.is_loading, "Loading...", "Continue"),
-                         border="1px solid black",
-                         height="45px",
-                         border_radius="10px",
-                         background_color="black",
-                         color="white",
-                         display="flex",
-                         justify_content="center",
-                         align_items="center",
-                         padding="6px",
-                         font_size="18px",
-                         line_height="28px",
-                         font_weight="700",
+                        border="1px solid black",
+                        height="45px",
+                        border_radius="10px",
+                        background_color="black",
+                        color="white",
+                        display="flex",
+                        justify_content="center",
+                        align_items="center",
+                        padding="6px",
+                        font_size="18px",
+                        line_height="28px",
+                        font_weight="700",
                     ),
                     as_child=True,
                     display="flex",

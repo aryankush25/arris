@@ -3,6 +3,7 @@ import reflex as rx
 from arris.utils import ClientStorageState
 from arris.schemas.shopify_page import create_store_page
 from arris.schemas.shopify_store import get_store
+from arris.schemas.shopify_page import get_store_page_by_page_id
 
 api_version = "2024-01"
 
@@ -24,6 +25,8 @@ class ShopifyPageService(ClientStorageState):
             elif shop_url.endswith(".myshopify.com"):
                 shop_url = store_name
 
+            print("shop_url", shop_url)
+
             session = shopify.Session(shop_url, api_version, store_data.access_token)
             shopify.ShopifyResource.activate_session(session)
 
@@ -33,6 +36,8 @@ class ShopifyPageService(ClientStorageState):
             page.save()
 
             page_info = page.to_dict()
+
+            shopify.ShopifyResource.clear_session()
 
             print("Page Info", page_info)
 
@@ -51,8 +56,10 @@ class ShopifyPageService(ClientStorageState):
                 store_id=store_data.id,
             )
 
-            return rx.window_alert("Page created")
+            page_id = get_store_page_by_page_id(str(page_info["id"])).id
+
+            return rx.redirect(f"/builder/{store_name}/{page_id}")
+
         except Exception as error:
             print("Create Page Error", error)
-        finally:
-            shopify.ShopifyResource.clear_session()
+            return rx.window_alert("Error creating page")
