@@ -1,53 +1,32 @@
 import reflex as rx
 from passlib.hash import pbkdf2_sha256
 from arris.utils import ClientStorageState
-from arris.schemas.user import add_user
 from arris.protected import not_require_login
 
 
-class RadixFormSubmissionState(ClientStorageState):
+from arris.schemas.user import get_user
+
+
+class LoginRadixFormSubmissionState(ClientStorageState):
     form_data: dict
 
     def handle_submit(self, form_data: dict):
 
-        add_user(
+        user = get_user(
             email=form_data["email"],
-            full_name=form_data["name"],
-            password=pbkdf2_sha256.hash(form_data["password"]),
         )
 
-        encoded = self.generate_token(form_data["email"])
+        if user and pbkdf2_sha256.verify(form_data["password"], user.password):
+            encoded = self.generate_token(form_data["email"])
 
-        # jwt.decode(encoded, "secret", algorithms=["HS256"])
-
-        yield [rx.redirect("/home"), ClientStorageState.set_custom_cookie(encoded)]
+            yield [rx.redirect("/home"), ClientStorageState.set_custom_cookie(encoded)]
 
 
 @not_require_login
-def register() -> rx.Component:
+def login() -> rx.Component:
 
     return rx.box(
         rx.form.root(
-            rx.form.field(
-                rx.flex(
-                    rx.form.label("Full Name"),
-                    rx.form.control(
-                        rx.input.input(
-                            placeholder="Full Name",
-                            # type attribute is required for "typeMismatch" validation
-                            type="name",
-                        ),
-                        as_child=True,
-                    ),
-                    rx.form.message(
-                        "Please enter a valid full name",
-                        match="typeMismatch",
-                    ),
-                    direction="column",
-                    spacing="2",
-                ),
-                name="name",
-            ),
             rx.form.field(
                 rx.flex(
                     rx.form.label("Email"),
@@ -92,6 +71,6 @@ def register() -> rx.Component:
                 rx.button("Submit"),
                 as_child=True,
             ),
-            on_submit=RadixFormSubmissionState.handle_submit,
+            on_submit=LoginRadixFormSubmissionState.handle_submit,
         ),
     )

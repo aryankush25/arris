@@ -1,12 +1,13 @@
 import reflex as rx
 from models import User
+from sqlmodel import select
 
 
-def get_users(self):
+def get_user(email: str):
     with rx.session() as session:
-        self.users = session.exec(
-            User.select.where(User.username.contains(self.name)).all()
-        )
+        user = session.exec(select(User).where(User.email == email)).first()
+
+        return user
 
 
 def add_user(
