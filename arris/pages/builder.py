@@ -156,19 +156,22 @@ def builder() -> rx.Component:
                         rx.cond(
                             BuilderState.is_product_selected,
                             rx.flex(
-                                rx.text(
-                                    "Selected product",
-                                    as_="div",
-                                    size="2",
-                                    weight="bold",
-                                ),
-                                rx.text(
-                                    "Clear",
-                                    as_="div",
-                                    size="1",
-                                    class_name="cursor-pointer text-blue",
-                                    margin_bottom="4px",
-                                    on_click=BuilderState.clear_selected_product(),
+                                rx.box(
+                                    rx.text(
+                                        "Selected product",
+                                        as_="div",
+                                        size="2",
+                                        weight="bold",
+                                    ),
+                                    rx.text(
+                                        "Clear",
+                                        as_="span",
+                                        size="2",
+                                        color_scheme="blue",
+                                        class_name="cursor-pointer text-blue",
+                                        on_click=BuilderState.clear_selected_product(),
+                                    ),
+                                    class_name="flex gap-2 items-center justify-between w-full",
                                 ),
                                 rx.box(
                                     rx.image(
