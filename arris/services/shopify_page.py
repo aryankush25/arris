@@ -39,14 +39,14 @@ class ShopifyPageService(ClientStorageState):
       create_store_page(
         page_id= page_info["id"],
         title= page_info["title"],
-        handle= page_info.handle,
-        body_html= page_info.body_html,
-        author=page_info.author,
-        template_suffix=page_info.template_suffix,
-        admin_graphql_api_id=page_info.admin_graphql_api_id,  
-        created_at=page_info.created_at,
-        updated_at=page_info.updated_at,
-        published_at=page_info.published_at,
+        handle= page_info["handle"],
+        body_html= page_info["body_html"],
+        author=page_info["author"],
+        template_suffix=page_info["template_suffix"],
+        admin_graphql_api_id=page_info["admin_graphql_api_id"],  
+        created_at=page_info["created_at"],
+        updated_at=page_info["updated_at"],
+        published_at=page_info["published_at"],
         email=email,
         store_id=store_data.id
       )
