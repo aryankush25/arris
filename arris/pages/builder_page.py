@@ -104,16 +104,19 @@ def builder_page() -> rx.Component:
             rx.box(
                 rx.box(
                     rx.image(
-                        src="/company_logo.png",
+                        src="/back_arrow.svg",
                         alt="Descriptive text about the image",
-                        height="45px",
-                        width="45px",
+                        height="25px",
+                        width="25px",
                     ),
                     rx.text(
                         BuilderPageState.data["title"],
                         class_name="text-xl font-bold text-black",
                     ),
-                    class_name="w-full flex gap-2 items-center",
+                    class_name="flex gap-4 items-center cursor-pointer",
+                    on_click=lambda: rx.redirect(
+                        f"/builder/{BuilderPageState.store_name}"
+                    ),
                 ),
                 class_name="flex items-center w-full px-4 max-w-7xl mx-auto",
             ),
