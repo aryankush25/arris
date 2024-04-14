@@ -64,6 +64,10 @@ def home() -> rx.Component:
             lambda store, index: rx.box(
                 rx.text(index + 1),
                 rx.text(store["name"]),
+                rx.chakra.link(
+                    "Go to builder ->",
+                    href=f"/builder/{store['name']}",
+                ),
                 padding_left="250px",
                 class_name="border border-gray",
             ),
