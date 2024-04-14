@@ -23,7 +23,6 @@ class RegisterState(ClientStorageState):
             return rx.window_alert("Please fill all the fields")
 
         self.is_loading = True
-        self.is_disabled = True 
 
         add_user(
             email=form_data["email"],
