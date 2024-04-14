@@ -113,6 +113,7 @@ def shopifyOAuthCallback(
             status_code=303,
         )
 
+
 def get_shopify_products(store_name: str):
     try:
         store_data = get_store_by_name(name=store_name)
@@ -132,7 +133,9 @@ def get_shopify_products(store_name: str):
         )
 
         session = shopify.Session(
-            f"{store_data.name}.myshopify.com", api_version, store_data.access_token
+            f"{store_data.name}.myshopify.com",
+            api_version,
+            store_data.access_token,
         )
 
         shopify.ShopifyResource.activate_session(session)
