@@ -25,6 +25,9 @@ scopes = [
     "write_script_tags",
     "write_shipping",
     "write_themes",
+    "write_online_store_pages",
+    "write_content",
+    "read_content",
 ]
 
 

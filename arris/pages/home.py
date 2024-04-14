@@ -1,9 +1,9 @@
 import reflex as rx
-from arris.services.shopify import ShopifyService
 from arris.protected import require_login
 from arris.utils import ClientStorageState
 from arris.schemas.shopify_store import get_stores
 from typing import List
+from arris.services.shopify import ShopifyService
 
 
 class HomeState(ClientStorageState):
