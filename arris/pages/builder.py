@@ -123,7 +123,10 @@ def builder() -> rx.Component:
                     rx.dialog.trigger(
                         rx.button(
                             "Generate new page",
-                            class_name="text-gray-500 md:text-lg font-medium cursor-pointer",
+                            height="40px",
+                            background_color="black",
+                            color="white",
+                            cursor="pointer",
                         )
                     ),
                     rx.dialog.content(
@@ -226,7 +229,13 @@ def builder() -> rx.Component:
                                     on_click=BuilderState.clear_selected,
                                 ),
                             ),
-                            rx.button("Create", on_click=BuilderState.createPage),
+                            rx.button(
+                                "Create",
+                                on_click=BuilderState.createPage,
+                                background_color="black",
+                                color="white",
+                                cursor="pointer",
+                            ),
                             spacing="3",
                             margin_top="16px",
                             justify="end",
