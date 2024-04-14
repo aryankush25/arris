@@ -22,22 +22,6 @@ def navbar() -> rx.Component:
             ),
             class_name="flex items-center gap-2"
         ),
-        rx.box(
-            rx.box(
-                "Home",
-                class_name="font-medium text-lg text-gray-500 cursor-pointer",
-                on_click=redirect_to_home
-            ),
-            rx.box(
-                "Product",
-                class_name="font-medium text-lg text-gray-500"
-            ),
-            rx.box(
-                "About Us",
-                class_name="font-medium text-lg text-gray-500"
-            ),
-            class_name="md:flex items-center hidden gap-16"
-        ),
         rx.cond(
                 ClientStorageState.custom_cookie,
                 rx.box(
