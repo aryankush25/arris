@@ -1,8 +1,8 @@
-"""empty message
+"""craete_shopify_theme
 
-Revision ID: 286d767eeb62
-Revises: ec874cd49ce3
-Create Date: 2024-04-14 03:40:41.987407
+Revision ID: c8e87791d866
+Revises: f17b8aeeb6a2
+Create Date: 2024-04-14 16:52:43.397131
 
 """
 from typing import Sequence, Union
@@ -12,8 +12,8 @@ import sqlalchemy as sa
 import sqlmodel
 
 # revision identifiers, used by Alembic.
-revision: str = '286d767eeb62'
-down_revision: Union[str, None] = 'ec874cd49ce3'
+revision: str = 'c8e87791d866'
+down_revision: Union[str, None] = 'f17b8aeeb6a2'
 branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None
 
