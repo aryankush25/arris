@@ -56,9 +56,10 @@ def register() -> rx.Component:
                     src="/company_logo.png",
                     alt="Descriptive text about the image",
                     height="45px",
+                    font_family="Integral CF",
                     width="45px",
                 ),
-                rx.text("ARRIS", class_name="text-2xl font-bold text-black"),
+                rx.text("ARRIS", font_family="Integral CF", class_name="text-2xl font-bold text-black"),
                 class_name="w-full flex gap-2 justify-center items-center",
             ),
             rx.form.root(

@@ -55,7 +55,7 @@ def login() -> rx.Component:
                     height="45px",
                     width="45px",
                 ),
-                rx.text("ARRIS", class_name="text-2xl font-bold text-black"),
+                rx.text("ARRIS", font_family="Integral CF", class_name="text-2xl font-bold text-black"),
                 class_name="w-full flex gap-2 justify-center items-center",
             ),
             rx.form.root(

@@ -16,6 +16,7 @@ def navbar() -> rx.Component:
             ),
             rx.text(
                 "ARRIS",
+                font_family="Integral CF",
                 class_name="font-semibold text-black text-[32px] md:text-5xl"
 
             ),
