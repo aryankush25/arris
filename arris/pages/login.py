@@ -27,6 +27,8 @@ class LoginState(ClientStorageState):
             encoded = self.generate_token(form_data["email"])
 
             yield [rx.redirect("/home"), ClientStorageState.set_custom_cookie(encoded)]
+        else:
+            yield rx.window_alert("Invalid email or password")
 
 
 @not_require_login
