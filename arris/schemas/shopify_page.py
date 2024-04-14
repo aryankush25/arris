@@ -59,7 +59,7 @@ def create_store_page(
         session.add(
             ShopifyPage(
               email=email,
-              store_id=store_id,
+              shopify_store_id=store_id,
               admin_graphql_api_id=admin_graphql_api_id,
               title=title,
               handle=handle,
