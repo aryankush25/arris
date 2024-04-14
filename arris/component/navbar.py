@@ -43,5 +43,5 @@ def navbar() -> rx.Component:
                 class_name="flex gap-6 items-center",
             ),
         ),
-        class_name="flex justify-between w-full md:mt-8 mt-4 px-4 max-w-7xl mx-auto",
+        class_name="flex justify-between w-full md:mt-8 mt-4 px-4 max-w-7xl mx-auto items-center",
     )
