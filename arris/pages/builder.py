@@ -3,13 +3,11 @@ from arris.services.shopify import get_store
 
 
 class BuilderState(rx.State):
-    store_name: str = ""
     data: dict = {}
 
     @rx.var
     def store_name(self) -> str:
-        self.store_name = self.router.page.params.get("store_name")
-        return self.store_name
+        return self.router.page.params.get("store_name")
 
     def get_data(self):
 
