@@ -79,10 +79,10 @@ def builder() -> rx.Component:
                 rx.text(index + 1),
                 rx.text(page["title"]),
                 rx.html(page["body_html"]),
-                # rx.chakra.link(
-                #     "Go to builder ->",
-                #     href=f"/builder/{store['name']}",
-                # ),
+                rx.chakra.link(
+                    "Go to builder page ->",
+                    href=f"/builder/{BuilderState.store_name}/{page['id']}",
+                ),
                 padding_left="250px",
                 class_name="border border-gray",
             ),
