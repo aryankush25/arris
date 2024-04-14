@@ -1,7 +1,7 @@
 import reflex as rx
 from arris.services.shopify import get_store
 from arris.protected import require_login
-from arris.services.shopify_page import ShopifyPageService
+from arris.services.shopify_page import update_page
 from arris.utils import ClientStorageState
 from arris.schemas.shopify_page import get_store_page_by_id, update_store_page
 
@@ -45,7 +45,7 @@ class BuilderPageState(ClientStorageState):
             self.save_disabled = True
 
     def save_page(self):
-        update_store_page(self.page_id, self.html)
+        update_page(self.store_name, self.page_id, self.html)
 
         self.save_disabled = True
         self.data.body_html = self.html

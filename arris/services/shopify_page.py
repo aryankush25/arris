@@ -1,7 +1,7 @@
 import shopify
 import reflex as rx
 from arris.utils import ClientStorageState
-from arris.schemas.shopify_page import create_store_page
+from arris.schemas.shopify_page import create_store_page, update_store_page, get_store_page_by_id
 from arris.schemas.shopify_store import get_store
 from arris.schemas.shopify_page import get_store_page_by_page_id
 
@@ -63,3 +63,35 @@ class ShopifyPageService(ClientStorageState):
         except Exception as error:
             print("Create Page Error", error)
             return rx.window_alert("Error creating page")
+            
+def update_page(store_name: str, page_id: str, page_body: str):
+    try:
+        page_data = get_store_page_by_id(id=page_id)
+        store_data = get_store(name=store_name)
+
+        if store_data == None:
+            return rx.window_alert("Store not found")
+
+        shop_url = f"{store_name}.myshopify.com"
+
+        session = shopify.Session(shop_url, api_version, store_data.access_token)
+        shopify.ShopifyResource.activate_session(session)
+
+        page = shopify.Page.find(page_data.page_id)
+        page.body_html = page_body
+        page.save()
+
+        page_info = page.to_dict()
+
+        shopify.ShopifyResource.clear_session()
+
+        update_store_page(
+            id=page_data.id,
+            body_html=page_info["body_html"],
+        )
+
+        return rx.window_alert("Page updated")
+    except Exception as error:
+        print("Update Page Error", error)
+    finally:
+        shopify.ShopifyResource.clear_session()
