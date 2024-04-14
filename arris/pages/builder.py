@@ -1,9 +1,11 @@
 import reflex as rx
 from arris.services.shopify import get_store
 from arris.protected import require_login
-from arris.services.shopify_page import ShopifyPageService
 from arris.utils import ClientStorageState
+from arris.services.shopify_page import ShopifyPageService
 from arris.schemas.shopify_page import get_store_pages
+from arris.services.shopify import get_shopify_products
+from arris.services.openai import get_completion
 
 
 class BuilderState(ClientStorageState):
@@ -15,13 +17,8 @@ class BuilderState(ClientStorageState):
         return self.router.page.params.get("store_name")
 
     def get_data(self):
-        print("self.store_name", self.store_name)
-
         self.data = get_store(self.store_name)
         self.pages = get_store_pages(self.data.id)
-
-        print("self.data", self.data)
-        print("self.pages", self.pages)
 
     def createPage(self, form_data: dict):
 
@@ -31,14 +28,14 @@ class BuilderState(ClientStorageState):
         if page_title == "":
             return rx.window_alert("Please enter a valid page title")
 
-        print("page_title", page_title)
-        print("html", html)
-
         return ShopifyPageService.create_page(
             self.store_name,
             page_title,
             html,
         )
+
+    def get_products(self):
+        return get_shopify_products(self.store_name)
 
 
 @rx.page(on_load=BuilderState.get_data, route="/builder/[store_name]")
@@ -75,10 +72,10 @@ def builder() -> rx.Component:
                 rx.text(index + 1),
                 rx.text(page["title"]),
                 rx.html(page["body_html"]),
-                # rx.chakra.link(
-                #     "Go to builder ->",
-                #     href=f"/builder/{store['name']}",
-                # ),
+                rx.chakra.link(
+                    "Go to builder page ->",
+                    href=f"/builder/{BuilderState.store_name}/{page['id']}",
+                ),
                 padding_left="250px",
                 class_name="border border-gray",
             ),

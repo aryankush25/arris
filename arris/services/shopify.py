@@ -132,7 +132,7 @@ def get_shopify_products(store_name: str):
         )
 
         session = shopify.Session(
-            f"{store_data['name']}.myshopify.com", api_version, store_data["access_token"]
+            f"{store_data.name}.myshopify.com", api_version, store_data.access_token
         )
 
         shopify.ShopifyResource.activate_session(session)
