@@ -12,4 +12,5 @@ config = rx.Config(
     be_domain=envConfig["BE_DOMAIN"],
     fe_domain=envConfig["FE_DOMAIN"],
     jwt_secret=envConfig["JWT_SECRET"],
+    openai_key=envConfig["OPENAI_KEY"],
 )
