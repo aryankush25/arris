@@ -69,4 +69,18 @@ def builder() -> rx.Component:
             ),
             on_submit=BuilderState.createPage,
         ),
+        rx.foreach(
+            BuilderState.pages,
+            lambda page, index: rx.box(
+                rx.text(index + 1),
+                rx.text(page["title"]),
+                rx.html(page["body_html"]),
+                # rx.chakra.link(
+                #     "Go to builder ->",
+                #     href=f"/builder/{store['name']}",
+                # ),
+                padding_left="250px",
+                class_name="border border-gray",
+            ),
+        ),
     )
