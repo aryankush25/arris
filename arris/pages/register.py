@@ -5,10 +5,25 @@ from arris.schemas.user import add_user
 from arris.protected import not_require_login
 
 
-class RadixFormSubmissionState(ClientStorageState):
+class RegisterState(ClientStorageState):
+    is_loading = False
     form_data: dict
 
     def handle_submit(self, form_data: dict):
+
+        print(form_data["email"])
+        print(form_data["name"])
+        print(form_data["password"])
+        print(form_data)
+
+        if (
+            form_data["email"] is ""
+            or form_data["name"] is ""
+            or form_data["password"] is ""
+        ):
+            return rx.window_alert("Please fill all the fields")
+
+        self.is_loading = True
 
         add_user(
             email=form_data["email"],
@@ -18,15 +33,13 @@ class RadixFormSubmissionState(ClientStorageState):
 
         encoded = self.generate_token(form_data["email"])
 
-        # jwt.decode(encoded, "secret", algorithms=["HS256"])
+        self.is_loading = False
 
         yield [rx.redirect("/home"), ClientStorageState.set_custom_cookie(encoded)]
 
 
 @not_require_login
 def register() -> rx.Component:
-    def redirect_to_signin():
-        return rx.redirect("/login")
 
     return rx.box(
         rx.box(
@@ -129,7 +142,7 @@ def register() -> rx.Component:
                 ),
                 rx.form.submit(
                     rx.button(
-                        "Create Account",
+                        rx.cond(RegisterState.is_loading, "Loading", "Create Account"),
                         class_name="border w-full h-[45px] border-black rounded-lg text-lg font-bold items-center justify-center text-white bg-black p-1.5 cursor-pointer",
                     ),
                     as_child=True,
@@ -146,11 +159,11 @@ def register() -> rx.Component:
                     rx.text(
                         "Sign In",
                         class_name="text-decoration-line: underline font-normal text-[#4193F3] text-sm cursor-pointer",
-                        on_click=redirect_to_signin,
+                        on_click=lambda: rx.redirect("/login"),
                     ),
                     class_name="flex justify-center gap-1 items-center",
                 ),
-                on_submit=RadixFormSubmissionState.handle_submit,
+                on_submit=RegisterState.handle_submit,
                 padding="20px 20px 20px 20px",
                 width="400px",
                 display="flex",
