@@ -11,24 +11,16 @@ def navbar() -> rx.Component:
     display_login: str = rx.Cookie("access-token")
     return rx.box(
         rx.box(
-            "ARRIS",
-            class_name="font-semibold text-[#5B9BF3] text-[32px] md:text-5xl"
-        ),
-        rx.box(
-            rx.box(
-                "Home",
-                class_name="font-medium text-lg text-gray-500 cursor-pointer",
-                on_click=redirect_to_home
+            rx.image(
+                src="/company_logo.png"
             ),
-            rx.box(
-                "Product",
-                class_name="font-medium text-lg text-gray-500"
+            rx.text(
+                "ARRIS",
+                font_family="Integral CF",
+                class_name="font-semibold text-black text-[32px] md:text-5xl"
+
             ),
-            rx.box(
-                "About Us",
-                class_name="font-medium text-lg text-gray-500"
-            ),
-            class_name="md:flex items-center hidden gap-16"
+            class_name="flex items-center gap-2"
         ),
         rx.cond(
                 ClientStorageState.custom_cookie,
