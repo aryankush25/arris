@@ -149,7 +149,7 @@ def login() -> rx.Component:
                 ),
                 on_submit=LoginState.handle_submit,
                 padding="20px 20px 20px 20px",
-                width="400px",
+                width=["300px", "350px", "400px", "400px" "400px"],
                 display="flex",
                 background_color="white",
                 flex_direction="column",
