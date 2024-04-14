@@ -101,7 +101,9 @@ def shopifyOAuthCallback(
             email=email,
         )
 
-        return RedirectResponse(config.fe_domain, status_code=303)
+        return RedirectResponse(
+            f"{config.fe_domain}/builder/{store_name}", status_code=303
+        )
 
     except Exception as error:
         print("OAuth Error", error)
