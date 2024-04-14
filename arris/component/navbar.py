@@ -1,6 +1,10 @@
 import reflex as rx # type: ignore
 
 def navbar() -> rx.Component:
+    def redirect_to_signup():
+        return rx.redirect("/register")
+    def redirect_to_signin():
+        return rx.redirect("/login")
     return rx.box(
         rx.box(
             "ARRIS",
@@ -24,11 +28,13 @@ def navbar() -> rx.Component:
         rx.box(
             rx.box(
                 "Login",
-                class_name="text-gray-500 md:text-lg font-medium"
+                class_name="text-gray-500 md:text-lg font-medium cursor-pointer",
+                on_click=redirect_to_signin
             ),
             rx.box(
                 "Sign Up",
-                class_name="text-white md:text-lg py-2 px-[14px] bg-black rounded-md"
+                class_name="text-white cursor-pointer md:text-lg py-2 px-[14px] bg-black rounded-md",
+                on_click=redirect_to_signup
             ),
             class_name="flex gap-3 items-center"
         ),

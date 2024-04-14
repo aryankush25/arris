@@ -1,6 +1,8 @@
 import reflex as rx
 
 def herosection() -> rx.Component:
+    def redirect_to_signup():
+        return rx.redirect("/register")
     return rx.box(
             rx.box(
                 rx.box(
@@ -37,7 +39,8 @@ def herosection() -> rx.Component:
                 rx.box(
                     rx.box(
                         "Get Started",
-                        class_name="border border-black rounded-lg text-xl items-center justify-center text-white bg-black px-6 py-3 md:py-4"
+                        class_name="border cursor-pointer border-black rounded-lg text-xl items-center justify-center text-white bg-black px-6 py-3 md:py-4",
+                        on_click=redirect_to_signup
                     ),
                     rx.box(
                         rx.image(
