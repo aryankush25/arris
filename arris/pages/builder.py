@@ -13,7 +13,7 @@ class BuilderState(ClientStorageState):
     pages: list[dict] = []
     products: list[dict] = []
 
-    page_title: str = ""
+    # page_title: str = ""
     selected_product: dict = {}
     is_product_selected: bool = False
 
@@ -30,13 +30,13 @@ class BuilderState(ClientStorageState):
 
     def createPage(self):
 
-        page_title = self.page_title
+        # page_title = self.page_title
         selected_product = self.selected_product
 
-        print("Creating Page", page_title, selected_product)
+        # print("Creating Page", page_title, selected_product)
 
-        if page_title == "":
-            return rx.window_alert("Please enter a valid page title")
+        # if page_title == "":
+        #     return rx.window_alert("Please enter a valid page title")
 
         if self.is_product_selected == False:
             return rx.window_alert("Please select a product")
@@ -56,7 +56,7 @@ class BuilderState(ClientStorageState):
 
         return ShopifyPageService.create_page(
             self.store_name,
-            page_title,
+            selected_product["title"],
             html,
         )
 
@@ -89,13 +89,13 @@ class BuilderState(ClientStorageState):
         self.selected_product = {}
         self.is_product_selected = False
 
-    def on_change(self, value):
-        self.page_title = value
+    # def on_change(self, value):
+    #     self.page_title = value
 
     def clear_selected(self):
         self.selected_product = {}
         self.is_product_selected = False
-        self.page_title
+        # self.page_title = ""
 
 
 @rx.page(on_load=BuilderState.get_data, route="/builder/[store_name]")
@@ -132,27 +132,32 @@ def builder() -> rx.Component:
                     rx.dialog.content(
                         rx.dialog.title("Generate new page using AI"),
                         rx.dialog.description(
-                            "Enter the page title and select a product to generate a new page using AI",
+                            "Select a product to generate a new page using AI",
                             size="2",
                             margin_bottom="16px",
                         ),
-                        rx.flex(
-                            rx.text(
-                                "Title",
-                                as_="div",
-                                size="2",
-                                margin_bottom="4px",
-                                weight="bold",
-                            ),
-                            rx.input(
-                                value=BuilderState.page_title,
-                                on_change=BuilderState.on_change,
-                                placeholder="Enter the page title",
-                            ),
-                            direction="column",
-                            spacing="3",
-                            margin_bottom="12px",
-                        ),
+                        # rx.dialog.description(
+                        #     "Enter the page title and select a product to generate a new page using AI",
+                        #     size="2",
+                        #     margin_bottom="16px",
+                        # ),
+                        # rx.flex(
+                        #     rx.text(
+                        #         "Title",
+                        #         as_="div",
+                        #         size="2",
+                        #         margin_bottom="4px",
+                        #         weight="bold",
+                        #     ),
+                        #     rx.input(
+                        #         value=BuilderState.page_title,
+                        #         on_change=BuilderState.on_change,
+                        #         placeholder="Enter the page title",
+                        #     ),
+                        #     direction="column",
+                        #     spacing="3",
+                        #     margin_bottom="12px",
+                        # ),
                         rx.cond(
                             BuilderState.is_product_selected,
                             rx.flex(
@@ -164,7 +169,7 @@ def builder() -> rx.Component:
                                         weight="bold",
                                     ),
                                     rx.text(
-                                        "Clear",
+                                        "Reset",
                                         as_="span",
                                         size="2",
                                         color_scheme="blue",
