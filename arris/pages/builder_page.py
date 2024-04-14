@@ -3,13 +3,14 @@ from arris.services.shopify import get_store
 from arris.protected import require_login
 from arris.services.shopify_page import ShopifyPageService
 from arris.utils import ClientStorageState
-from arris.schemas.shopify_page import get_store_page_by_id
+from arris.schemas.shopify_page import get_store_page_by_id, update_store_page
 
 
 class BuilderPageState(ClientStorageState):
     data: dict = {}
     is_fetching: bool = False
     html: str = "<div></div>"
+    save_disabled: bool = True
 
     @rx.var
     def store_name(self) -> str:
@@ -38,6 +39,17 @@ class BuilderPageState(ClientStorageState):
     def handle_change(self, html: str):
         self.html = html
 
+        if html != self.data.body_html:
+            self.save_disabled = False
+        else:
+            self.save_disabled = True
+
+    def save_page(self):
+        update_store_page(self.page_id, self.html)
+
+        self.save_disabled = True
+        self.data.body_html = self.html
+
 
 @rx.page(on_load=BuilderPageState.get_data, route="/builder/[store_name]/[page_id]")
 @require_login
@@ -50,7 +62,14 @@ def builder_page() -> rx.Component:
         ),
         rx.box(
             rx.heading("Builder Page"),
-            rx.heading(BuilderPageState.data["title"]),
+            rx.flex(
+                rx.heading(BuilderPageState.data["title"]),
+                rx.button(
+                    "Save",
+                    disabled=BuilderPageState.save_disabled,
+                    on_click=BuilderPageState.save_page,
+                ),
+            ),
             rx.flex(
                 rx.text_area(
                     placeholder="Type here...",
