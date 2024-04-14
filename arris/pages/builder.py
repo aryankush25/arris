@@ -33,12 +33,10 @@ class BuilderState(ClientStorageState):
             page_title,
             html,
         )
-        
+
     def get_products(self):
         return get_shopify_products(self.store_name)
 
-    def open_ai_chat(self):
-        return get_completion("Hello, how are you?")
 
 @rx.page(on_load=BuilderState.get_data, route="/builder/[store_name]")
 @require_login
@@ -46,11 +44,6 @@ def builder() -> rx.Component:
     return rx.box(
         rx.heading("Builder Page"),
         rx.heading(BuilderState.data["name"]),
-        rx.button(
-            "Products",
-            color_scheme="ruby",
-            on_click=BuilderState.open_ai_chat,
-        ),
         rx.form.root(
             rx.form.field(
                 rx.flex(
