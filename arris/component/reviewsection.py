@@ -59,7 +59,7 @@ def reviewsection() -> rx.Component:
                     ),
                     class_name="flex flex-col gap-2.5 md:max-w-[255px] w-full border bg-white border-[##9CA3AF] rounded-3xl p-5"
                 ),
-                class_name="flex flex-col gap-5"
+                class_name="flex flex-col gap-4 md:gap-5"
             ),
             rx.box(
                 rx.box(
@@ -113,7 +113,7 @@ def reviewsection() -> rx.Component:
                     ),
                     class_name="flex flex-col gap-2.5 md:max-w-[255px] w-full border bg-white border-[##9CA3AF] rounded-3xl p-5"
                 ),
-                class_name="flex flex-col gap-5"
+                class_name="flex flex-col gap-4 md:gap-5"
             ),
             rx.box(
                 rx.box(
@@ -167,7 +167,7 @@ def reviewsection() -> rx.Component:
                     ),
                     class_name="flex flex-col gap-2.5 md:max-w-[255px] w-full border bg-white border-[##9CA3AF] rounded-3xl p-5"
                 ),
-                class_name="flex flex-col gap-5"
+                class_name="flex flex-col gap-4 md:gap-5"
             ),
             rx.box(
                 rx.box(
@@ -221,9 +221,9 @@ def reviewsection() -> rx.Component:
                     ),
                     class_name="flex flex-col gap-2.5 md:max-w-[255px] w-full border bg-white border-[##9CA3AF] rounded-3xl p-5"
                 ),
-                class_name="flex flex-col gap-5"
+                class_name="flex flex-col gap-4 md:gap-5"
             ),
-            class_name="flex gap-5 flex-col md:flex-row"
+            class_name="flex gap-4 md:gap-5 flex-col md:flex-row"
         ),
-        class_name="max-w-7xl mx-auto w-full flex flex-col gap-5 items-center mt-28"
+        class_name="max-w-7xl mx-auto w-full flex flex-col gap-4 md:gap-5 items-center mt-28 px-4"
     )

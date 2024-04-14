@@ -34,7 +34,7 @@ def templates() -> rx.Component:
             ),
             class_name="flex justify-between md:gap-2 flex-col md:flex-row"
         ),
-        class_name="flex flex-col gap-7 md:gap-16 justify-center items-center"
+        class_name="flex flex-col gap-7 px-4 md:gap-16 justify-center items-center"
         ),
         class_name="flex justify-between w-full mt-20 max-w-7xl mx-auto"
     )

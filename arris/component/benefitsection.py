@@ -59,7 +59,7 @@ def benefitssection() -> rx.Component:
                     ),
                     class_name="flex p-5 gap-4 items-start rounded-xl bg-white shadow-md max-w-[568px]"
                 ),
-                class_name="flex flex-col gap-7"
+                class_name="flex flex-col gap-4 md:gap-7"
             ),
             rx.image(
                 src="/benefits.svg",
@@ -67,5 +67,5 @@ def benefitssection() -> rx.Component:
             ),
             class_name="flex items-center justify-between"
         ),
-        class_name="max-w-7xl mt-28 w-full mx-auto flex flex-col items-center gap-8"
+        class_name="max-w-7xl mt-20 md:mt-28 w-full mx-auto flex flex-col items-center gap-8"
     )

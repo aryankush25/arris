@@ -74,7 +74,7 @@ def featuresection() -> rx.Component:
             ),
             class_name="flex flex-col md:flex-row w-full gap-3 md:gap-7 mx-auto justify-center items-center"
         ),
-        class_name="flex flex-col mx-auto max-w-7xl w-full gap-12 text-center"
+        class_name="flex flex-col mx-auto max-w-7xl w-full gap-12 text-center px-3"
     ),
     class_name="bg-[#5B9BF3] w-full mx-auto mt-28 py-16 md:py-32",
 )

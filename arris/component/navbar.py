@@ -32,5 +32,5 @@ def navbar() -> rx.Component:
             ),
             class_name="flex gap-3 items-center"
         ),
-        class_name="flex justify-between w-full md:mt-14 mt-8 max-w-7xl mx-auto"
+        class_name="flex justify-between w-full md:mt-14 mt-8 px-4 max-w-7xl mx-auto"
     )

@@ -63,5 +63,5 @@ def herosection() -> rx.Component:
                 ),
                 class_name="flex w-[50%] mt-4 justify-end h-[370px] max-h-[560px] h-full"
             ),
-            class_name="flex flex-col md:flex-row gap-40 md:gap-0 justify-between w-full mt-16 text-center md:text-left items-center md:mt-28 max-w-7xl mx-auto"
+            class_name="flex flex-col md:flex-row px-4 gap-40 md:gap-0 justify-between w-full mt-16 text-center md:text-left items-center md:mt-28 max-w-7xl mx-auto"
         )
