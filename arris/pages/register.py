@@ -5,6 +5,8 @@ from arris.schemas.user import add_user
 from arris.protected import not_require_login
 
 EMAIL_REGEX = r"(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)"
+
+
 class RegisterState(ClientStorageState):
     is_loading = False
     form_data: dict
@@ -34,7 +36,6 @@ class RegisterState(ClientStorageState):
 
         self.is_loading = False
 
-
         yield [rx.redirect("/home"), ClientStorageState.set_custom_cookie(encoded)]
 
 
@@ -56,10 +57,12 @@ def register() -> rx.Component:
                     src="/company_logo.png",
                     alt="Descriptive text about the image",
                     height="45px",
+                    font_family="Integral CF",
                     width="45px",
                 ),
-                rx.text("ARRIS", class_name="text-2xl font-bold text-black"),
-                class_name="w-full flex gap-2 justify-center items-center",
+                rx.text("ARRIS", font_family="Integral CF", class_name="text-2xl font-bold text-black"),
+                class_name="w-full flex gap-2 justify-center items-center cursor-pointer",
+                on_click=lambda: rx.redirect("/"),
             ),
             rx.form.root(
                 rx.box(
@@ -112,7 +115,6 @@ def register() -> rx.Component:
                         rx.form.message(
                             "Please enter a valid email",
                             match="typeMismatch",
-                            
                         ),
                         direction="column",
                         spacing="2",
@@ -143,19 +145,21 @@ def register() -> rx.Component:
                 ),
                 rx.form.submit(
                     rx.button(
-                        rx.cond(RegisterState.is_loading, "Loading...", "Create Account"),
-                         border="1px solid black",
-                         height="45px",
-                         border_radius="10px",
-                         background_color="black",
-                         color="white",
-                         display="flex",
-                         justify_content="center",
-                         align_items="center",
-                         padding="6px",
-                         font_size="18px",
-                         line_height="28px",
-                         font_weight="700",
+                        rx.cond(
+                            RegisterState.is_loading, "Loading...", "Create Account"
+                        ),
+                        border="1px solid black",
+                        height="45px",
+                        border_radius="10px",
+                        background_color="black",
+                        color="white",
+                        display="flex",
+                        justify_content="center",
+                        align_items="center",
+                        padding="6px",
+                        font_size="18px",
+                        line_height="28px",
+                        font_weight="700",
                     ),
                     as_child=True,
                     display="flex",

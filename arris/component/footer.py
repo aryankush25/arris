@@ -7,7 +7,7 @@ def footer() -> rx.Component:
             rx.box(
                 rx.box(
                 rx.image(
-                   src="/play.png",
+                   src="/company_logo.png",
                    alt="Descriptive text about the image",
                    box_size="14px",
                    max_width="40%",
@@ -15,13 +15,14 @@ def footer() -> rx.Component:
                 ),
                 rx.box(
                     "ARRIS",
+                    font_family="Integral CF",
                     class_name="font-bold text-black text-lg"
                 ),
                 class_name="flex gap-2 items-center justify-center"
             ),
             rx.box(
-                "Arris uses AI to generate working Webpages without the hassle to code.",
-                class_name="font-normal text-black text-sm mt-4 md:max-w-xs md:text-left text-center"
+                "ARRIS uses AI to generate working Webpages without the hassle to code.",
+                class_name="font-normal text-black text-sm mt-4 md:max-w-xs text-center"
             ),
             ),
             rx.box(
