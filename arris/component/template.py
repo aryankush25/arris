@@ -14,7 +14,7 @@ def templates() -> rx.Component:
                     alt="Descriptive text about the image",
                     box_size="400px",
                 ),
-                class_name="h-[725px] object-contain"
+                class_name="object-contain"
             ),
             rx.box(
                 rx.image(
@@ -22,7 +22,7 @@ def templates() -> rx.Component:
                     alt="Descriptive text about the image",
                     box_size="400px",
                 ),
-                class_name="h-[960px] object-contain"
+                class_name="object-contain"
             ),
             rx.box(
                 rx.image(
@@ -30,9 +30,9 @@ def templates() -> rx.Component:
                     alt="Descriptive text about the image",
                     box_size="400px",
                 ),
-                class_name="h-[740px] object-contain"
+                class_name="object-contain"
             ),
-            class_name="flex justify-between md:gap-2 flex-col md:flex-row"
+            class_name="flex justify-between gap-2 flex-col md:flex-row"
         ),
         class_name="flex flex-col gap-7 px-4 md:gap-16 justify-center items-center"
         ),

@@ -4,7 +4,7 @@ def benefitssection() -> rx.Component:
     return rx.box(
         rx.box(
             "What Benefit Will You Get",
-            class_name="font-bold text-[32px]"
+            class_name="font-bold text-center text-2xl md:text-[32px]"
         ),
         rx.box(
             rx.box(
@@ -67,5 +67,5 @@ def benefitssection() -> rx.Component:
             ),
             class_name="flex items-center justify-between"
         ),
-        class_name="max-w-7xl mt-20 md:mt-28 w-full mx-auto flex flex-col items-center gap-8"
+        class_name="max-w-7xl mt-20 md:mt-28 w-full mx-auto flex flex-col items-center px-4 gap-8"
     )

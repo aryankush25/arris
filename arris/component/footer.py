@@ -17,7 +17,7 @@ def footer() -> rx.Component:
                     "ARRIS",
                     class_name="font-bold text-black text-lg"
                 ),
-                class_name="flex gap-2 items-center"
+                class_name="flex gap-2 items-center justify-center"
             ),
             rx.box(
                 "Arris uses AI to generate working",
@@ -61,7 +61,7 @@ def footer() -> rx.Component:
                 class_name="flex gap-3 items-center mt-4"
             ),
             ),
-            class_name="flex flex-col justify-between md:h-[315px] md:w-[40%]"
+            class_name="flex flex-col justify-between md:h-[315px] w-full items-center md:w-[40%]"
 
         ),
         rx.box(
@@ -216,5 +216,5 @@ def footer() -> rx.Component:
         ),
         class_name="max-w-7xl flex-col md:flex-row flex w-full mx-auto items-center gap-10"
         ),
-        class_name="w-full flex bg-blue-200 bg-opactiy-70 mt-6 py-16"
+        class_name="w-full flex bg-blue-200 bg-opactiy-70 mt-12 md:mt-6 py-16 px-4"
     )
