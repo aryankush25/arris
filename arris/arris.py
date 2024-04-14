@@ -1,7 +1,3 @@
-"""The main Dashboard App."""
-
-from rxconfig import config
-
 import reflex as rx
 
 from arris.styles import THEME, STYLESHEETS
