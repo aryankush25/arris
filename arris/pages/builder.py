@@ -16,6 +16,6 @@ class BuilderState(rx.State):
         print(self.data)
 
 
-# @rx.page(on_load=BuilderState.get_data)
+@rx.page(on_load=BuilderState.get_data)
 def builder():
     return rx.heading(BuilderState.store_name)
