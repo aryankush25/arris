@@ -36,7 +36,7 @@ def navbar() -> rx.Component:
                 class_name="text-white cursor-pointer md:text-lg py-2 px-[14px] bg-black rounded-md",
                 on_click=redirect_to_signup
             ),
-            class_name="flex gap-3 items-center"
+            class_name="flex gap-5 items-center"
         ),
         class_name="flex justify-between w-full md:mt-14 mt-8 px-4 max-w-7xl mx-auto"
     )
