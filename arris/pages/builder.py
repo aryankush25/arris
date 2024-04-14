@@ -15,6 +15,7 @@ class BuilderState(ClientStorageState):
 
     page_title: str = ""
     selected_product: dict = {}
+    is_product_selected: bool = False
 
     @rx.var
     def store_name(self) -> str:
@@ -78,10 +79,12 @@ class BuilderState(ClientStorageState):
 
     def set_selected_product(self, product):
         self.selected_product = product
+        self.is_product_selected = True
         print("Selected Product", self.selected_product)
 
-    def is_selected_product(self, product):
-        return "" if self.selected_product != product else "border-2"
+    def clear_selected_product(self):
+        self.selected_product = {}
+        self.is_product_selected = False
 
 
 @rx.page(on_load=BuilderState.get_data, route="/builder/[store_name]")
@@ -115,38 +118,70 @@ def builder() -> rx.Component:
                     spacing="3",
                     margin_bottom="12px",
                 ),
-                rx.flex(
-                    rx.text(
-                        "Choose a product",
-                        as_="div",
-                        size="2",
-                        margin_bottom="4px",
-                        weight="bold",
-                    ),
-                    rx.grid(
-                        rx.foreach(
-                            BuilderState.products,
-                            lambda product: rx.box(
-                                rx.image(
-                                    src=product["image"],
-                                    width="100px",
-                                    height="auto",
-                                ),
-                                rx.text(
-                                    product["title"],
-                                    align="center",
-                                ),
-                                on_click=BuilderState.set_selected_product(product),
-                                class_name=f"border border-blue cursor-pointer flex flex-col justify-center items-center gap-2 rounded p-2 {BuilderState.is_selected_product(product)}",
-                                # border=BuilderState.is_selected_product(product),
-                            ),
+                rx.cond(
+                    BuilderState.is_product_selected,
+                    rx.flex(
+                        rx.text(
+                            "Selected product",
+                            as_="div",
+                            size="2",
+                            weight="bold",
                         ),
-                        columns="3",
-                        spacing="4",
-                        width="100%",
+                        rx.text(
+                            "Clear",
+                            as_="div",
+                            size="1",
+                            class_name="cursor-pointer text-blue",
+                            margin_bottom="4px",
+                            on_click=BuilderState.clear_selected_product(),
+                        ),
+                        rx.box(
+                            rx.image(
+                                src=BuilderState.selected_product["image"],
+                                width="100px",
+                                height="auto",
+                            ),
+                            rx.text(
+                                BuilderState.selected_product["title"],
+                                align="center",
+                            ),
+                            class_name=f"border border-blue cursor-pointer flex flex-col justify-center items-center gap-2 rounded p-2",
+                        ),
+                        direction="column",
+                        spacing="3",
                     ),
-                    direction="column",
-                    spacing="3",
+                    rx.flex(
+                        rx.text(
+                            "Choose a product",
+                            as_="div",
+                            size="2",
+                            margin_bottom="4px",
+                            weight="bold",
+                        ),
+                        rx.grid(
+                            rx.foreach(
+                                BuilderState.products,
+                                lambda product: rx.box(
+                                    rx.image(
+                                        src=product["image"],
+                                        width="100px",
+                                        height="auto",
+                                    ),
+                                    rx.text(
+                                        product["title"],
+                                        align="center",
+                                    ),
+                                    on_click=BuilderState.set_selected_product(product),
+                                    class_name=f"border border-blue cursor-pointer flex flex-col justify-center items-center gap-2 rounded p-2",
+                                ),
+                            ),
+                            columns="3",
+                            spacing="4",
+                            width="100%",
+                        ),
+                        direction="column",
+                        spacing="3",
+                    ),
                 ),
                 rx.flex(
                     rx.dialog.close(
