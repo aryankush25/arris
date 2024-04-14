@@ -216,5 +216,5 @@ def footer() -> rx.Component:
         ),
         class_name="max-w-7xl flex-col md:flex-row flex w-full mx-auto items-center gap-10"
         ),
-        class_name="w-full flex bg-blue-200 bg-opactiy-70 mt-12 md:mt-6 py-16 px-4"
+        class_name="w-full flex bg-blue-100 bg-opactiy-70 mt-12 md:mt-6 py-16 px-4"
     )
