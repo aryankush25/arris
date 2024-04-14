@@ -18,11 +18,11 @@ def get_completion(prompt, model="gpt-3.5-turbo"):
     return response.choices[0].message.content
 
 
-def generate_html_for_products(title, url, desc, price):
+def generate_html_for_products(title, image_url, desc, price):
     prompts = f"""
       Design a Shopify hero section for a product page featuring the {title}. The section should be elegantly styled using HTML with inline CSS
       product title: {title}
-      product image url: {url}
+      product image url: {image_url}
       product description: {desc}
       product price: {price}
 
