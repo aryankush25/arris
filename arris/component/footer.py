@@ -21,7 +21,7 @@ def footer() -> rx.Component:
             ),
             rx.box(
                 "Arris uses AI to generate working Webpages without the hassle to code.",
-                class_name="font-normal text-black text-sm mt-4 md:max-w-xs md:text-left text-center"
+                class_name="font-normal text-black text-sm mt-4 md:max-w-xs text-center"
             ),
             ),
             rx.box(

@@ -11,8 +11,15 @@ def navbar() -> rx.Component:
     display_login: str = rx.Cookie("access-token")
     return rx.box(
         rx.box(
-            "ARRIS",
-            class_name="font-semibold text-[#5B9BF3] text-[32px] md:text-5xl"
+            rx.image(
+                src="/company_logo.png"
+            ),
+            rx.text(
+                "ARRIS",
+                class_name="font-semibold text-black text-[32px] md:text-5xl"
+
+            ),
+            class_name="flex items-center gap-2"
         ),
         rx.box(
             rx.box(
