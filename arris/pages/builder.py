@@ -268,8 +268,7 @@ def builder() -> rx.Component:
             on_click=lambda: rx.redirect(f"/home"),
         ),
         rx.cond(
-            BuilderState.pages == [],
-            rx.text("No pages found"),
+            BuilderState.pages,
             rx.box(
                 rx.foreach(
                     BuilderState.pages,
@@ -292,6 +291,14 @@ def builder() -> rx.Component:
                     ),
                 ),
                 class_name="flex gap-6 px-4 md:px-0 flex-col mx-auto md:flex-row items-center flex-wrap justify-start pb-16",
+            ),
+            rx.box(
+                rx.image(src="/empty.avif", class_name="w-[400px] h-[300px]"),
+                rx.box(
+                    "No pages found. Generate a new page using AI.",
+                    class_name="mt-6 font-semibold text text-xl text-center mx-auto",
+                ),
+                class_name="flex flex-col justify-center items-center",
             ),
         ),
         class_name="max-w-7xl flex-col flex gap-6 mx-auto h-screen w-full px-4",
