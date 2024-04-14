@@ -20,12 +20,8 @@ def footer() -> rx.Component:
                 class_name="flex gap-2 items-center justify-center"
             ),
             rx.box(
-                "Arris uses AI to generate working",
-                class_name="font-normal text-black text-sm mt-4"
-            ),
-            rx.box(
-                "Webpages without the hassle to code.",
-                class_name="font-normal text-black text-sm"
+                "Arris uses AI to generate working Webpages without the hassle to code.",
+                class_name="font-normal text-black text-sm mt-4 md:max-w-xs md:text-left text-center"
             ),
             ),
             rx.box(

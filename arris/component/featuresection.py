@@ -34,7 +34,7 @@ def featuresection() -> rx.Component:
                         src="/screen.png",
                         class_name="mx-auto w-64 h-40"
                     ),
-                class_name="p-6 flex gap-4 flex-col rounded-lg bg-white max-h-[430px] h-full max-w-[360px] w-full"
+                class_name="p-6 flex gap-4 flex-col rounded-lg bg-white h-full md:max-w-[360px] w-full"
             ),
             rx.box(
                 rx.box(
@@ -52,16 +52,16 @@ def featuresection() -> rx.Component:
                         src="/phone.png",
                         class_name="mx-auto w-64 h-40"
                     ),
-                class_name="p-6 flex gap-4 flex-col rounded-lg bg-white max-h-[430px] h-full max-w-[360px] w-full"
+                class_name="p-6 flex gap-4 flex-col rounded-lg bg-white h-full md:max-w-[360px] w-full"
             ),
             rx.box(
                 rx.box(
                     rx.text(
-                    "Drag and drop editing",
+                    "Drag and drop editing feature",
                     class_name="text-black font-bold text-3xl"
                 ),
                 rx.text(
-                    "Drag and Drop to create responsive pages and sections. Add text, buttons and pull product images straight from Shopify.",
+                    "Drag and Drop to create responsive pages and sections. Add text, buttons and pull product images straight from Shopify by just dragging and dropping them from your system into our editor.",
                     class_name="text-[#33373A99]"
                 ),
                 class_name="flex flex-col gap-1.5"
@@ -70,7 +70,7 @@ def featuresection() -> rx.Component:
                         src="/dragdrop.png",
                         class_name="mx-auto w-64 h-40"
                     ),
-                class_name="p-6 flex gap-4 flex-col rounded-lg bg-white h-[430px] max-w-[360px] w-full"
+                class_name="p-6 flex gap-4 flex-col rounded-lg bg-white md:max-w-[360px] w-full"
             ),
             class_name="flex flex-col md:flex-row w-full gap-3 md:gap-7 mx-auto justify-center items-center"
         ),
