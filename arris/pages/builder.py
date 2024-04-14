@@ -102,13 +102,27 @@ class BuilderState(ClientStorageState):
 @require_login
 def builder() -> rx.Component:
     return rx.box(
-        rx.heading("Builder Page"),
-        rx.heading(BuilderState.data["name"]),
-        rx.cond(
+        rx.box(
+            rx.box(
+                rx.box(
+                rx.image(
+                    src="/company_logo.png",
+                    alt="Descriptive text about the image",
+                    height="45px",
+                    width="45px",
+                ),
+                rx.text("ARRIS", class_name="text-2xl font-bold text-black"),
+                class_name="w-full flex gap-2 items-center",
+            ),
+            rx.heading(BuilderState.data["name"],class_name="text-lg text-gray-500 font-semibold border py-2 rounded-lg px-4"),
+            class_name="flex flex-col gap-1"
+            ),
+            rx.cond(
             BuilderState.is_generating_page,
             rx.text("Generating page..."),
             rx.dialog.root(
-                rx.dialog.trigger(rx.button("Generate new page")),
+                rx.dialog.trigger(rx.button("Generate new page",                 class_name="text-gray-500 md:text-lg font-medium cursor-pointer",
+)),
                 rx.dialog.content(
                     rx.dialog.title("Generate new page using AI"),
                     rx.dialog.description(
@@ -217,7 +231,10 @@ def builder() -> rx.Component:
                 ),
             ),
         ),
-        rx.foreach(
+        class_name="flex w-full mt-16 justify-between items-center"
+        ),
+        rx.box(
+            rx.foreach(
             BuilderState.pages,
             lambda page, index: rx.box(
                 rx.text(index + 1),
@@ -228,7 +245,10 @@ def builder() -> rx.Component:
                     href=f"/builder/{BuilderState.store_name}/{page['id']}",
                 ),
                 padding_left="250px",
-                class_name="border border-gray",
+                class_name="border border-gray max-w-[550px] w-full",
             ),
         ),
+        class_name="flex gap-6 px-4 md:px-0 flex-col mx-auto md:flex-row items-center"
+        ),
+        class_name="max-w-7xl flex-col flex gap-20 mx-auto h-screen w-full"
     )
