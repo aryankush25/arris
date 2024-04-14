@@ -10,8 +10,8 @@ def reviewsection() -> rx.Component:
             rx.box(
                 rx.box(
                     rx.box(
-                        rx.box(
-                            class_name="rounded-full w-7 h-7 bg-gray-500"
+                        rx.image(
+                            src="/profiles/1.png",
                         ),
                         rx.text(
                             "Cédric van Ravesteijn",
@@ -27,8 +27,8 @@ def reviewsection() -> rx.Component:
                 ),
                 rx.box(
                     rx.box(
-                        rx.box(
-                            class_name="rounded-full w-7 h-7 bg-gray-500"
+                        rx.image(
+                            src="/profiles/2.png",
                         ),
                         rx.text(
                             "Melody O.",
@@ -44,8 +44,8 @@ def reviewsection() -> rx.Component:
                 ),
                 rx.box(
                     rx.box(
-                        rx.box(
-                            class_name="rounded-full w-7 h-7 bg-gray-500"
+                        rx.image(
+                            src="/profiles/3.png",
                         ),
                         rx.text(
                             "Thaer Swailem",
@@ -64,8 +64,8 @@ def reviewsection() -> rx.Component:
             rx.box(
                 rx.box(
                     rx.box(
-                        rx.box(
-                            class_name="rounded-full w-7 h-7 bg-gray-500"
+                        rx.image(
+                            src="/profiles/4.png",
                         ),
                         rx.text(
                             "Lenderson M.",
@@ -81,8 +81,8 @@ def reviewsection() -> rx.Component:
                 ),
                 rx.box(
                     rx.box(
-                        rx.box(
-                            class_name="rounded-full w-7 h-7 bg-gray-500"
+                        rx.image(
+                            src="/profiles/5.png",
                         ),
                         rx.text(
                             "Haris Sulaiman",
@@ -98,8 +98,8 @@ def reviewsection() -> rx.Component:
                 ),
                 rx.box(
                     rx.box(
-                        rx.box(
-                            class_name="rounded-full w-7 h-7 bg-gray-500"
+                        rx.image(
+                            src="/profiles/6.png",
                         ),
                         rx.text(
                             "Rico Trevisan",
@@ -118,8 +118,8 @@ def reviewsection() -> rx.Component:
             rx.box(
                 rx.box(
                     rx.box(
-                        rx.box(
-                            class_name="rounded-full w-7 h-7 bg-gray-500"
+                        rx.image(
+                            src="/profiles/7.png",
                         ),
                         rx.text(
                             "Cristian Nobile",
@@ -135,8 +135,8 @@ def reviewsection() -> rx.Component:
                 ),
                 rx.box(
                     rx.box(
-                        rx.box(
-                            class_name="rounded-full w-7 h-7 bg-gray-500"
+                        rx.image(
+                            src="/profiles/8.png",
                         ),
                         rx.text(
                             "Madhusudhan",
@@ -152,8 +152,8 @@ def reviewsection() -> rx.Component:
                 ),
                 rx.box(
                     rx.box(
-                        rx.box(
-                            class_name="rounded-full w-7 h-7 bg-gray-500"
+                        rx.image(
+                            src="/profiles/9.png",
                         ),
                         rx.text(
                             "Mitchell B.",
@@ -172,8 +172,8 @@ def reviewsection() -> rx.Component:
             rx.box(
                 rx.box(
                     rx.box(
-                        rx.box(
-                            class_name="rounded-full w-7 h-7 bg-gray-500"
+                        rx.image(
+                            src="/profiles/10.png",
                         ),
                         rx.text(
                             "Andreas Blomqvist",
@@ -189,8 +189,8 @@ def reviewsection() -> rx.Component:
                 ),
                 rx.box(
                     rx.box(
-                        rx.box(
-                            class_name="rounded-full w-7 h-7 bg-gray-500"
+                        rx.image(
+                            src="/profiles/11.png",
                         ),
                         rx.text(
                             "Yã izidoro",
@@ -206,8 +206,8 @@ def reviewsection() -> rx.Component:
                 ),
                 rx.box(
                     rx.box(
-                        rx.box(
-                            class_name="rounded-full w-7 h-7 bg-gray-500"
+                        rx.image(
+                            src="/profiles/12.png",
                         ),
                         rx.text(
                             "Timothy Upai Lindris",

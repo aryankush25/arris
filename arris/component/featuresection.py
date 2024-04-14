@@ -52,7 +52,7 @@ def featuresection() -> rx.Component:
                         src="/phone.png",
                         class_name="mx-auto w-64 h-40"
                     ),
-                class_name="p-6 flex gap-4 flex-col rounded-lg bg-white max-w-[360px] w-full"
+                class_name="p-6 flex gap-4 flex-col rounded-lg bg-white max-h-[430px] h-full max-w-[360px] w-full"
             ),
             rx.box(
                 rx.box(
@@ -70,7 +70,7 @@ def featuresection() -> rx.Component:
                         src="/dragdrop.png",
                         class_name="mx-auto w-64 h-40"
                     ),
-                class_name="p-6 flex gap-4 flex-col rounded-lg bg-white max-w-[360px] w-full"
+                class_name="p-6 flex gap-4 flex-col rounded-lg bg-white h-[430px] max-w-[360px] w-full"
             ),
             class_name="flex flex-col md:flex-row w-full gap-3 md:gap-7 mx-auto justify-center items-center"
         ),
