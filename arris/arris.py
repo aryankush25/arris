@@ -1,5 +1,7 @@
 """The main Dashboard App."""
 
+from rxconfig import config
+
 import reflex as rx
 
 from arris.styles import BACKGROUND_COLOR, FONT_FAMILY, THEME, STYLESHEETS
