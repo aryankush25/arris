@@ -54,6 +54,7 @@ def create_store_page(
   email: str,
   store_id: int
 ):
+    print("Creating Page in DB", page_id, title, handle, body_html, author, template_suffix, admin_graphql_api_id, created_at, updated_at, published_at, email, store_id)
     with rx.session() as session:
         session.add(
             ShopifyPage(

@@ -1,5 +1,5 @@
 import reflex as rx
-from arris.services.shopify import ShopifyService
+from arris.services.shopify_page import ShopifyPageService
 from arris.protected import require_login
 from arris.utils import ClientStorageState
 
@@ -8,8 +8,10 @@ class ShopifyRadixFormSubmissionState(rx.State):
     form_data: dict
 
     def handle_submit(self, form_data: dict):
-        return ShopifyService.publish_page_and_update_theme(form_data["store_name"])
-        # return ShopifyService.install_app(form_data["store_name"])
+        return ShopifyService.install_app(form_data["store_name"])
+
+def createPage():
+    return ShopifyPageService.craete_page("xg-dev", "ISHITA", "<h1>ARRIS</h1>")
 
 
 @require_login
@@ -20,6 +22,11 @@ def home() -> rx.Component:
             "Logout",
             color_scheme="ruby",
             on_click=ClientStorageState.logout,
+        ),
+        rx.button(
+            "Craete Page",
+            color_scheme="ruby",
+            on_click=createPage,
         ),
         rx.form.root(
             rx.form.field(
