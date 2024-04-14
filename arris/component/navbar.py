@@ -17,7 +17,8 @@ def navbar() -> rx.Component:
         rx.box(
             rx.box(
                 "Home",
-                class_name="font-medium text-lg text-gray-500"
+                class_name="font-medium text-lg text-gray-500 cursor-pointer",
+                on_click=redirect_to_home
             ),
             rx.box(
                 "Product",
