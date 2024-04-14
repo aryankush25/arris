@@ -12,6 +12,7 @@ class BuilderState(ClientStorageState):
     data: dict = {}
     pages: list[dict] = []
     products: list[dict] = []
+    raw_products: list = []
 
     # page_title: str = ""
     selected_product: dict = {}
@@ -45,11 +46,24 @@ class BuilderState(ClientStorageState):
 
         self.is_generating_page = True
 
+        selected_raw_product = next(
+            (
+                product
+                for product in self.raw_products
+                if product["id"] == selected_product["id"]
+            ),
+            None,
+        )
+
+        print("Selected Raw Product", selected_raw_product)
+
         html = generate_html_for_products(
             selected_product["title"],
             selected_product["image"],
             selected_product["desc"],
             selected_product["price"],
+            self.store_name,
+            selected_raw_product,
         )
 
         self.is_generating_page = False
@@ -64,6 +78,37 @@ class BuilderState(ClientStorageState):
         products = get_shopify_products(self.store_name)
 
         for product in products:
+            self.raw_products.append(
+                {
+                    "id": product.id,
+                    "title": product.title,
+                    "body_html": product.body_html,
+                    "vendor": product.vendor,
+                    "product_type": product.product_type,
+                    "created_at": product.created_at,
+                    "updated_at": product.updated_at,
+                    "tags": product.tags,
+                    "variants": [
+                        {
+                            "id": variant.id,
+                            "title": variant.title,
+                            "price": variant.price,
+                            "sku": variant.sku,
+                            "inventory_management": variant.inventory_management,
+                        }
+                        for variant in product.variants
+                    ],
+                    "images": [
+                        {
+                            "id": image.id,
+                            "src": image.src,
+                            "alt": image.alt,
+                        }
+                        for image in product.images
+                    ],
+                }
+            )
+
             self.products.append(
                 {
                     "id": product.id,
@@ -77,8 +122,6 @@ class BuilderState(ClientStorageState):
             )
 
         # print("Products", self.products)
-
-        return products
 
     def set_selected_product(self, product):
         self.selected_product = product
