@@ -95,3 +95,27 @@ def update_page(store_name: str, page_id: str, page_body: str):
         print("Update Page Error", error)
     finally:
         shopify.ShopifyResource.clear_session()
+
+def delete_page(store_name: str, page_id: str):
+    try:
+        page_data = get_store_page_by_id(id=page_id)
+        store_data = get_store(name=store_name)
+
+        if store_data == None:
+            return rx.window_alert("Store not found")
+
+        shop_url = f"{store_name}.myshopify.com"
+
+        session = shopify.Session(shop_url, api_version, store_data.access_token)
+        shopify.ShopifyResource.activate_session(session)
+
+        page = shopify.Page.find(page_data.page_id)
+        page.destroy()
+
+        shopify.ShopifyResource.clear_session()
+
+        return rx.window_alert("Page removed")
+    except Exception as error:
+        print("Remove Page Error", error)
+    finally:
+        shopify.ShopifyResource.clear_session()
