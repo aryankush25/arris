@@ -7,14 +7,21 @@ from arris.protected import not_require_login
 from arris.schemas.user import get_user
 
 
-class LoginRadixFormSubmissionState(ClientStorageState):
+class LoginState(ClientStorageState):
+    is_loading = False
     form_data: dict
 
     def handle_submit(self, form_data: dict):
 
+        if form_data["email"] is "" or form_data["password"] is "":
+            return rx.window_alert("Please fill all the fields")
+
+        self.is_loading = True
         user = get_user(
             email=form_data["email"],
         )
+
+        self.is_loading = False
 
         if user and pbkdf2_sha256.verify(form_data["password"], user.password):
             encoded = self.generate_token(form_data["email"])
@@ -24,8 +31,6 @@ class LoginRadixFormSubmissionState(ClientStorageState):
 
 @not_require_login
 def login() -> rx.Component:
-    def redirect_to_signin():
-        return rx.redirect("/register")
 
     return rx.box(
         rx.box(
@@ -104,7 +109,7 @@ def login() -> rx.Component:
                 ),
                 rx.form.submit(
                     rx.button(
-                        "Get Started",
+                        rx.cond(LoginState.is_loading, "Loading", "Continue"),
                         class_name="border w-full h-[45px] border-black rounded-lg text-lg font-bold items-center justify-center text-white bg-black p-1.5",
                     ),
                     as_child=True,
@@ -121,11 +126,11 @@ def login() -> rx.Component:
                     rx.text(
                         "Create Account",
                         class_name="text-decoration-line: underline font-normal text-[#4193F3] text-sm cursor-pointer",
-                        on_click=redirect_to_signin,
+                        on_click=lambda: rx.redirect("/register"),
                     ),
                     class_name="flex justify-center gap-1 items-center",
                 ),
-                on_submit=LoginRadixFormSubmissionState.handle_submit,
+                on_submit=LoginState.handle_submit,
                 padding="20px 20px 20px 20px",
                 width="400px",
                 display="flex",
