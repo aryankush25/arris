@@ -3,9 +3,14 @@ from models import ShopifyStores
 from sqlmodel import select
 
 
-def get_stores():
+def get_stores(email):
     with rx.session() as session:
-        stores = session.exec(ShopifyStores.select.all())
+        stores = session.exec(
+            select(ShopifyStores).where(ShopifyStores.email == email)
+        ).all()
+
+        print(stores)
+
         return stores
 
 
