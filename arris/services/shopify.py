@@ -24,7 +24,7 @@ class ShopifyService(ClientStorageState):
             if not shop:
                 return rx.window_alert("Shop parameter is missing")
 
-            storeData = get_store(name=shop)
+            storeData = get_store(name=shop, email=email)
 
             if storeData != None:
                 return rx.window_alert("App already installed")

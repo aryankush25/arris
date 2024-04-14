@@ -16,10 +16,20 @@ def get_stores(email):
 
 def get_store(
     name: str,
+    email: str = None,
 ):
     with rx.session() as session:
+        if email is None:
+            store = session.exec(
+                select(ShopifyStores).where(ShopifyStores.name == name)
+            ).first()
+
+            return store
+
         store = session.exec(
-            select(ShopifyStores).where(ShopifyStores.name.contains(name))
+            select(ShopifyStores).where(
+                ShopifyStores.name == name and ShopifyStores.email == email
+            )
         ).first()
 
         return store

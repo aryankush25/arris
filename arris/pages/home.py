@@ -107,34 +107,37 @@ def home() -> rx.Component:
             ),
             class_name="flex flex-col gap-6 justify-center items-center w-full md:mt-14 mt-8 px-4 max-w-7xl mx-auto",
         ),
-        rx.box(
-            rx.text("Store List", class_name="text-2xl font-bold text-black"),
+        rx.cond(
+            HomeState.data,
             rx.box(
-                rx.foreach(
-                    HomeState.data,
-                    lambda store, index: rx.box(
-                        rx.text(store["name"], class_name="text-lg font-bold"),
-                        rx.image(
-                            src="/store.png",
-                            alt="Descriptive text about the image",
-                            height="100%",
-                            max_height="180px",
-                            width="100%",
+                rx.text("Store List", class_name="text-2xl font-bold text-black"),
+                rx.box(
+                    rx.foreach(
+                        HomeState.data,
+                        lambda store, index: rx.box(
+                            rx.text(store["name"], class_name="text-lg font-bold"),
+                            rx.image(
+                                src="/store.png",
+                                alt="Descriptive text about the image",
+                                height="100%",
+                                max_height="180px",
+                                width="100%",
+                            ),
+                            rx.chakra.link(
+                                "View Pages",
+                                href=f"/builder/{store['name']}",
+                                color="#4193F3",
+                                display="flex",
+                                flex_direction="row-reverse",
+                            ),
+                            class_name="border rounded-lg p-2 flex flex-col gap-4 w-full max-w-[250px] h-[250px] border-gray",
+                            # on_click=lambda store=store: rx.redirect(f"/builder/{store['name']}"),
                         ),
-                        rx.chakra.link(
-                            "View Pages",
-                            href=f"/builder/{store['name']}",
-                            color="#4193F3",
-                            display="flex",
-                            flex_direction="row-reverse",
-                        ),
-                        class_name="border rounded-lg p-2 flex flex-col gap-4 w-full max-w-[250px] h-[250px] border-gray",
-                        # on_click=lambda store=store: rx.redirect(f"/builder/{store['name']}"),
                     ),
+                    class_name="flex flex-wrap max-w-7xl mb-16 mt-4 gap-10 justify-center items-center",
                 ),
-                class_name="flex flex-wrap max-w-7xl mb-16 mt-4 gap-10 justify-center items-center",
+                class_name="flex flex-col gap-4 justify-center items-center w-full md:mt-14 mt-8 px-4 max-w-7xl mx-auto",
             ),
-            class_name="flex flex-col gap-4 justify-center items-center w-full md:mt-14 mt-8 px-4 max-w-7xl mx-auto",
         ),
         class_name="min-h-screen w-full flex gap-4 flex-col bg-[#F4FAFF]",
     )
