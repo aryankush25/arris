@@ -4,17 +4,16 @@ from arris.utils import ClientStorageState
 from arris.schemas.user import add_user
 from arris.protected import not_require_login
 
-
+EMAIL_REGEX = r"(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)"
 class RegisterState(ClientStorageState):
     is_loading = False
     form_data: dict
 
-    def handle_submit(self, form_data: dict):
+    def validate_email(self, email: str) -> bool:
+        """Validate the email format using a regex pattern."""
+        return rx.match(EMAIL_REGEX, email) is not None
 
-        print(form_data["email"])
-        print(form_data["name"])
-        print(form_data["password"])
-        print(form_data)
+    def handle_submit(self, form_data: dict):
 
         if (
             form_data["email"] is ""
@@ -24,6 +23,7 @@ class RegisterState(ClientStorageState):
             return rx.window_alert("Please fill all the fields")
 
         self.is_loading = True
+        self.is_disabled = True 
 
         add_user(
             email=form_data["email"],
@@ -34,6 +34,7 @@ class RegisterState(ClientStorageState):
         encoded = self.generate_token(form_data["email"])
 
         self.is_loading = False
+
 
         yield [rx.redirect("/home"), ClientStorageState.set_custom_cookie(encoded)]
 
@@ -112,6 +113,7 @@ def register() -> rx.Component:
                         rx.form.message(
                             "Please enter a valid email",
                             match="typeMismatch",
+                            
                         ),
                         direction="column",
                         spacing="2",
@@ -142,7 +144,7 @@ def register() -> rx.Component:
                 ),
                 rx.form.submit(
                     rx.button(
-                        rx.cond(RegisterState.is_loading, "Loading", "Create Account"),
+                        rx.cond(RegisterState.is_loading, "Loading...", "Create Account"),
                          border="1px solid black",
                          height="45px",
                          border_radius="10px",

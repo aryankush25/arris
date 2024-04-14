@@ -6,10 +6,14 @@ from arris.protected import not_require_login
 
 from arris.schemas.user import get_user
 
-
+EMAIL_REGEX = r"(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)"
 class LoginState(ClientStorageState):
-    is_loading = False
+    is_loading= False
     form_data: dict
+
+    def validate_email(self, email: str) -> bool:
+        """Validate the email format using a regex pattern."""
+        return rx.match(EMAIL_REGEX, email) is not None
 
     def handle_submit(self, form_data: dict):
 
@@ -111,7 +115,7 @@ def login() -> rx.Component:
                 ),
                 rx.form.submit(
                     rx.button(
-                        rx.cond(LoginState.is_loading, "Loading", "Continue"),
+                        rx.cond(LoginState.is_loading, "Loading...", "Continue"),
                          border="1px solid black",
                          height="45px",
                          border_radius="10px",
