@@ -56,3 +56,13 @@ class ClientStorageState(rx.State):
 
     def logout(self):
         yield [rx.remove_cookie("access_token"), rx.redirect("/login")]
+
+
+def get_email_from_token(jwt_token: str):
+    payload = jwt.decode(
+        jwt_token,
+        config.jwt_secret,
+        algorithms=["HS256"],
+    )
+
+    return payload["email"]

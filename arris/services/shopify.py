@@ -1,16 +1,16 @@
-import random
 import reflex as rx
 from rxconfig import config
-import requests
 from fastapi.responses import RedirectResponse
-from arris.utils import ClientStorageState, scopes
+from arris.utils import ClientStorageState, scopes, get_email_from_token
+import shopify
 
 from arris.schemas.shopify_store import (
     get_store,
     add_store,
-    update_store,
     get_store_by_name,
 )
+
+api_version = "2024-01"
 
 
 class ShopifyService(ClientStorageState):
@@ -22,63 +22,91 @@ class ShopifyService(ClientStorageState):
                 return rx.redirect("/login")
 
             if not shop:
-                return "Shop parameter is missing"
+                return rx.window_alert("Shop parameter is missing")
 
-            storeData = get_store(name=shop, is_app_installed=True)
+            storeData = get_store(name=shop)
 
-            nonce = random.getrandbits(64)
+            if storeData != None:
+                return rx.window_alert("App already installed")
 
-            if storeData is None:
-                add_store(
-                    name=shop,
-                    email=email,
-                    state=nonce,
-                    access_token=None,
-                    is_app_installed=False,
-                )
+            shopify.Session.setup(
+                api_key=config.shopify_api_key, secret=config.shopify_api_secret_key
+            )
 
-            if storeData != None and storeData.is_app_installed:
-                return "App already installed"
+            shop_url = f"{shop}.myshopify.com"
 
-            be_domain = config.be_domain
-            shopify_api_key = config.shopify_api_key
+            if shop.startswith("https://") or shop.startswith("http://"):
+                shop_url = shop.split("/")[2]
+            elif shop_url.endswith(".myshopify.com"):
+                shop_url = shop
 
-            scopeString = ",".join(scopes)
-            redirectUri = f"{be_domain}/oauth/callback"
-            authUrl = f"https://{shop}.myshopify.com/admin/oauth/authorize?client_id={shopify_api_key}&scope={scopeString}&redirect_uri={redirectUri}&state={nonce}"
+            state = self.generate_token(email)
+            redirect_uri = f"{config.be_domain}/oauth/callback"
 
-            print("Redirecting to: ", authUrl)
+            newSession = shopify.Session(shop_url, api_version)
+            auth_url = newSession.create_permission_url(scopes, redirect_uri, state)
 
-            return rx.redirect(authUrl)
+            print("Redirecting to: ", auth_url)
+
+            return rx.redirect(auth_url)
         except Exception as error:
             print("Store Error", error)
+            return rx.window_alert(f"Store Error {error}")
 
 
-def shopifyOAuthCallback(code: str, shop: str, state: str):
-    # if code is None | shop is None | state is None:
-    #     return "Missing code or shop or state parameter"
+def shopifyOAuthCallback(
+    code: str,
+    shop: str,
+    state: str,
+    hmac: str,
+    host: str,
+    timestamp: str,
+):
+    if code is None or shop is None or state is None:
+        return RedirectResponse(
+            f"{config.fe_domain}/home?error=missing_code_or_shop_or_state_parameter",
+            status_code=303,
+        )
 
-    accessTokenUrl = f"https://{shop}/admin/oauth/access_token"
-    accessParams = {
-        "client_id": config.shopify_api_key,
-        "client_secret": config.shopify_api_secret_key,
+    store_name = shop.split(".")[0]
+    storeData = get_store_by_name(name=store_name)
+
+    if storeData != None:
+        return RedirectResponse(
+            f"{config.fe_domain}/home?error=app_already_installed",
+            status_code=303,
+        )
+
+    access_params = {
         "code": code,
+        "shop": shop,
+        "state": state,
+        "hmac": hmac,
+        "host": host,
+        "timestamp": timestamp,
     }
 
     try:
+        shopify.Session.setup(
+            api_key=config.shopify_api_key, secret=config.shopify_api_secret_key
+        )
+        session = shopify.Session(shop, api_version)
+        access_token = session.request_token(access_params)
 
-        response = requests.post(accessTokenUrl, data=accessParams)
+        email = get_email_from_token(state)
 
-        access_token = response.json().get("access_token")
-        store_name = shop.split(".")[0]
-
-        storeData = get_store_by_name(name=store_name)
-        if not storeData:
-            return "Store not found"
-
-        update_store(name=store_name, access_token=access_token)
+        add_store(
+            name=store_name,
+            access_token=access_token,
+            email=email,
+        )
 
         return RedirectResponse(config.fe_domain, status_code=303)
 
     except Exception as error:
         print("OAuth Error", error)
+
+        return RedirectResponse(
+            f"{config.fe_domain}/home?error=oauth_error?error={error}",
+            status_code=303,
+        )
