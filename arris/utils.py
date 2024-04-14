@@ -2,6 +2,31 @@ import reflex as rx
 import jwt
 from rxconfig import config
 
+scopes = [
+    "read_products",
+    "read_orders",
+    "read_analytics",
+    "read_orders",
+    "read_product_feeds",
+    "read_product_listings",
+    "read_products",
+    "read_script_tags",
+    "read_shipping",
+    "read_shopify_payments_payouts",
+    "read_themes",
+    "write_checkouts",
+    "write_customers",
+    "write_draft_orders",
+    "write_inventory",
+    "write_marketing_events",
+    "write_orders",
+    "write_price_rules",
+    "write_products",
+    "write_script_tags",
+    "write_shipping",
+    "write_themes",
+]
+
 
 class ClientStorageState(rx.State):
     custom_cookie: str = rx.Cookie(

@@ -7,7 +7,7 @@ from arris.protected import not_require_login
 from arris.schemas.user import get_user
 
 
-class LoginRadixFormSubmissionState(rx.State):
+class LoginRadixFormSubmissionState(ClientStorageState):
     form_data: dict
 
     def handle_submit(self, form_data: dict):
@@ -16,12 +16,8 @@ class LoginRadixFormSubmissionState(rx.State):
             email=form_data["email"],
         )
 
-        user.password
-
-        # TODO: Use .env file for secret
-
         if user and pbkdf2_sha256.verify(form_data["password"], user.password):
-            encoded = ClientStorageState.generate_token(form_data["email"])
+            encoded = self.generate_token(form_data["email"])
 
             yield [rx.redirect("/home"), ClientStorageState.set_custom_cookie(encoded)]
 

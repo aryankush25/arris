@@ -1,31 +1,12 @@
 """The main index page."""
 
 import reflex as rx
-from arris.services.shopify import ShopifyService
-from arris.protected import require_login
-from arris.utils import ClientStorageState
 
 
-# @rx.page(on_load=IndexLoadState.get_data)
-@require_login
 def index() -> rx.Component:
 
     return rx.box(
-        rx.button(
-            "Logout",
-            color_scheme="ruby",
-            on_click=ClientStorageState.logout,
-        ),
-        rx.button(
-            "Decrement",
-            color_scheme="ruby",
-            on_click=ShopifyService.install_app,
-            # on_click=AddUser.add_user,
-        ),
-        rx.box(
-            margin_top="calc(50px + 2em)",
-            padding="2em",
-        ),
+        rx.text("Welcome to Arris"),
         padding_left="250px",
         padding_top="100px",
     )
