@@ -14,5 +14,5 @@ def videosection() -> rx.Component:
             playing=True,
             loop=True
         ),
-        class_name="max-w-7xl justify-center items-center text-center mt-28 mx-auto w-full flex flex-col gap-3"
+        class_name="max-w-7xl justify-center items-center text-center mt-16 md:mt-28 mx-auto w-full flex flex-col gap-3"
     )

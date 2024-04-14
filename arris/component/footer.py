@@ -58,11 +58,10 @@ def footer() -> rx.Component:
                    box_size="14px",
                    class_name="w-[20px] h-[20px]" 
                 ),
-               
                 class_name="flex gap-3 items-center mt-4"
             ),
             ),
-            class_name="flex flex-col justify-between h-[315px] w-[40%]"
+            class_name="flex flex-col justify-between md:h-[315px] md:w-[40%]"
 
         ),
         rx.box(
@@ -211,11 +210,11 @@ def footer() -> rx.Component:
                     class_name="font-normal text-black text-sm"
                     ),
             ),
-            class_name="flex flex-col gap-4 h-[315px]",
+            class_name="flex flex-col gap-4 md:h-[315px]",
         ),
-        class_name="flex justify-between w-[60%]"
+        class_name="flex gap-5 md:justify-between md:w-[60%]"
         ),
-        class_name="max-w-7xl flex w-full mx-auto"
+        class_name="max-w-7xl flex-col md:flex-row flex w-full mx-auto items-center gap-10"
         ),
         class_name="w-full flex bg-blue-200 bg-opactiy-70 mt-6 py-16"
     )

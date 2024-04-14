@@ -15,7 +15,7 @@ def benefitssection() -> rx.Component:
                     rx.box(
                         rx.text(
                             "TIME-SAVING",
-                            class_name="font-semibold text-xl"
+                            class_name="font-semibold text-lg md:text-xl"
                         ),
                         rx.text(
                             "Offer pre-designed templates and intuitive tools for creating a website quickly, eliminating the need for coding and designing from scratch.",
@@ -32,7 +32,7 @@ def benefitssection() -> rx.Component:
                     rx.box(
                         rx.text(
                             "CUSTOMIZATION OPTIONS",
-                            class_name="font-semibold text-xl"
+                            class_name="font-semibold text-lg md:text-xl"
                         ),
                         rx.text(
                             "Easy setup and customization options for a unique website. Personalize colors, fonts, layouts, and more to match your brand identity and specific needs.",
@@ -49,7 +49,7 @@ def benefitssection() -> rx.Component:
                     rx.box(
                         rx.text(
                             "EASE OF USE",
-                            class_name="font-semibold text-xl"
+                            class_name="font-semibold text-lg md:text-xl"
                         ),
                         rx.text(
                             "User-friendly interfaces and drag-and-drop functionality, allowing even those with limited technical expertise to create professional websites easily.",
@@ -62,9 +62,10 @@ def benefitssection() -> rx.Component:
                 class_name="flex flex-col gap-7"
             ),
             rx.image(
-                src="/benefits.svg"
+                src="/benefits.svg",
+                class_name="hidden md:block"
             ),
             class_name="flex items-center justify-between"
         ),
-        class_name="max-w-7xl mt-28 w-full mx-auto flex flex-col gap-8"
+        class_name="max-w-7xl mt-28 w-full mx-auto flex flex-col items-center gap-8"
     )
