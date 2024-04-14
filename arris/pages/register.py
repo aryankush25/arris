@@ -177,7 +177,7 @@ def register() -> rx.Component:
                 ),
                 on_submit=RegisterState.handle_submit,
                 padding="20px 20px 20px 20px",
-                width="400px",
+                width=["300px", "350px", "400px", "400px" "400px"],
                 display="flex",
                 background_color="white",
                 flex_direction="column",
