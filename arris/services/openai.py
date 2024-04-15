@@ -27,7 +27,7 @@ def generate_html_for_products(
     selected_product,
 ):
     prompts = f"""
-      Design a Shopify hero section for a product page featuring the {title}. The section should be elegantly styled using HTML with inline CSS
+      Design a Shopify detailed html for a product page featuring the {title}. The section should be elegantly styled using HTML with inline CSS. Following are the product details:
       product title: {title}
       product image url: {image_url}
       product description: {desc}
