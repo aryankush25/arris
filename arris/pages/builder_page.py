@@ -4,6 +4,7 @@ from arris.protected import require_login
 from arris.services.shopify_page import update_page, delete_page
 from arris.utils import ClientStorageState
 from arris.schemas.shopify_page import get_store_page_by_id
+from arris.services.openai import enhance_html
 
 
 class BuilderPageState(ClientStorageState):
@@ -56,6 +57,10 @@ class BuilderPageState(ClientStorageState):
         self.save_disabled = True
         self.data.body_html = self.html
 
+    def enhance_html(self):
+        enhanced_html = enhance_html(self.html)
+        self.handle_change(enhanced_html)
+
 
 @rx.page(on_load=BuilderPageState.get_data, route="/builder/[store_name]/[page_id]")
 @require_login
@@ -80,24 +85,35 @@ def builder_page() -> rx.Component:
                         font_family="Integral CF",
                         class_name="text-2xl font-bold text-black",
                     ),
-                    class_name="w-full flex gap-2 items-center",
+                    class_name="w-full flex gap-2 items-center flex-1",
                 ),
-                rx.cond(
-                    BuilderPageState.save_disabled,
+                rx.box(
                     rx.button(
-                        "Save and Publish",
-                        disabled=BuilderPageState.save_disabled,
-                        height="40px",
-                        color="white",
-                    ),
-                    rx.button(
-                        "Save and Publish",
-                        on_click=BuilderPageState.save_page,
+                        "Enhance HTML using AI",
+                        on_click=BuilderPageState.enhance_html,
                         height="40px",
                         background_color="black",
                         color="white",
                         cursor="pointer",
                     ),
+                    rx.cond(
+                        BuilderPageState.save_disabled,
+                        rx.button(
+                            "Save and Publish",
+                            disabled=BuilderPageState.save_disabled,
+                            height="40px",
+                            color="white",
+                        ),
+                        rx.button(
+                            "Save and Publish",
+                            on_click=BuilderPageState.save_page,
+                            height="40px",
+                            background_color="black",
+                            color="white",
+                            cursor="pointer",
+                        ),
+                    ),
+                    class_name="flex gap-2 items-center",
                 ),
                 class_name="flex justify-between items-center w-full mt-2 px-4 max-w-7xl mx-auto",
             ),
