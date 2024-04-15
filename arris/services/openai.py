@@ -42,6 +42,8 @@ def generate_html_for_products(
       4. Don't generate ```html in the start and ``` in the end of the code block.
     """
 
+    print("prompts", prompts)
+
     html = get_completion(prompts)
     print("html", html)
 
@@ -61,6 +63,8 @@ def enhance_html(html: str):
       3. Only give the code of body block
       4. Don't generate ```html in the start and ``` in the end of the code block.
     """
+
+    print("enhance_prompts", prompts)
 
     enhanced_html = get_completion(prompts)
     print("enhanced_html", enhanced_html)
