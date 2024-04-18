@@ -28,11 +28,7 @@ The project requires several environment variables to run correctly. You can fin
 
 ## Running the Application
 
-To run the application, use the `reflex run` command. This will start the Reflex application and serve it on a local web server.
-
-### Run the App in Development Mode
-
-Run it in development mode:
+To run the application, use the following command. This will start the Reflex application and serve it on a local web server.
 
 ```bash
 reflex run
@@ -48,10 +44,10 @@ reflex run --loglevel debug
 
 Reflex will hot reload any code changes in real time when running in development mode. Your code edits will show up on <http://localhost:3000> automatically.
 
-### Contributing
+## Contributing
 
 Contributions to this project are welcome. Please ensure that any changes do not break existing functionality and that all code is properly formatted and documented.
 
-### License
+## License
 
 This project is licensed under the terms of the included LICENSE file.
