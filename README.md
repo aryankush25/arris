@@ -42,7 +42,7 @@ Follow these steps to set up a Shopify app:
 
 6. **Finalize App Creation:** Click on 'Create app'.
 
-> **Note:** Replace `your-backend-domain` with your application's actual backend domain. You can find and set this value in the `BE_DOMAIN` environment variable in your .env file.
+> **Note:** Replace `https://your-backend-domain` with your application's actual backend domain. For local development, use `http://localhost:8000/`. You can find and set this value in the `BE_DOMAIN` environment variable in your .env file.
 
 ## Running the Application
 
@@ -52,7 +52,12 @@ To run the application, use the following command. This will start the Reflex ap
 reflex run
 ```
 
-Your app runs at <http://localhost:3000>.
+To verify that the application is running correctly, you can open the following URLs in your web browser:
+
+- [http://localhost:3000](http://localhost:3000) - This is the URL where your app is served.
+- [http://localhost:8000/ping](http://localhost:8000/ping) - This URL should return "pong" as a response, indicating that the server is running properly.
+
+> **Note:** You can add these URLs to the `BE_DOMAIN` and `FE_DOMAIN` environment variables in your `.env` file.
 
 Reflex prints logs to the terminal. To increase log verbosity to help with debugging, use the --loglevel flag:
 
