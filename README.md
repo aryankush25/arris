@@ -30,11 +30,10 @@ The project requires several environment variables to run correctly. You can fin
 
 1. Log in to your [Shopify Partners](https://partners.shopify.com/) account.
 2. Click on 'Apps' in the sidebar menu.
-3. Click on 'Create app'.
-4. Fill in the 'App name' and 'App URL' fields. The App URL should be the URL where your app is hosted.
-5. Under the 'App settings' section, fill in the 'Allowed redirection URL(s)' field with the redirect URI(s) for your app. This is where Shopify will send users after they authorize the installation of your app. For this project, it would be `https://your-backend-domain/oauth/callback`.
+3. Click on 'Create app' and then 'Create app manually'. Fill in the 'App name' and then create the app.
+4. After the app is created, you will be redirected to the app's overview page. Here, you can find the 'Client ID' and 'Client secret' under the 'Client credentials' section. These keys are needed for the Shopify integration in this project. Copy them and set the `SHOPIFY_API_KEY` and `SHOPIFY_API_SECRET_KEY` environment variables respectively in your .env file accordingly.
+5. Under the 'Configuration' section, fill in the 'Allowed redirection URL(s)' field with the redirect URI(s) and 'App URL' fields for your app. The App URL should be the URL where your app is hosted and Allowed redirection URL(s) is where Shopify will send users after they authorize the installation of your app. For this project, it would be `https://your-backend-domain/oauth/callback`.
 6. Click on 'Create app'.
-7. After the app is created, you will be redirected to the app's overview page. Here, you can find the 'API key' and 'API secret key' under the 'API credentials' section. These keys are needed for the Shopify integration in this project. Copy them and set the `SHOPIFY_API_KEY` and `SHOPIFY_API_SECRET_KEY` environment variables in your .env file accordingly.
 
 > **Note:** Please note that you need to replace `your-backend-domain` with the actual backend domain of your application. You can find this value in the `BE_DOMAIN` environment variable in your `.env` file.
 
