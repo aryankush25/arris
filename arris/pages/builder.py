@@ -322,7 +322,7 @@ def builder() -> rx.Component:
                                 class_name="text-lg font-bold flex-1",
                             ),
                             rx.chakra.link(
-                                "View pages",
+                                "Edit",
                                 href=f"/builder/{BuilderState.store_name}/{page['id']}",
                                 color="#4193F3",
                                 display="flex",
