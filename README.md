@@ -6,10 +6,10 @@ This project is an AI-powered, Reflex-based dashboard application for generating
 
 Follow these steps to install the project:
 
-1. Install Reflex by running `pip install reflex`.
-2. Setup a virtual environment for Python. You can refer to these resources for guidance:
+1. Setup a virtual environment for Python. You can refer to these resources for guidance:
    - [Introduction to Pyenv](https://realpython.com/intro-to-pyenv/)
    - [Differences between venv, pyvenv, pyenv, virtualenv, virtualenvwrapper, pipenv, etc](https://stackoverflow.com/questions/41573587/what-is-the-difference-between-venv-pyvenv-pyenv-virtualenv-virtualenvwrappe)
+2. Install Reflex by running `pip install reflex`.
 3. Install the required Python packages by running `pip install -r requirements.txt`.
 
 ## Database Setup
