@@ -1,6 +1,6 @@
 # Arris Dashboard
 
-This project is a Reflex-based dashboard application for managing Shopify stores. Reflex is a powerful, open-source platform for building web applications. It provides a user-friendly interface for store owners to manage their products and orders.
+This project is an AI-powered, Reflex-based dashboard application for generating and managing pages in Shopify stores. Reflex is a powerful, open-source platform for building web applications. It provides a user-friendly interface for store owners to streamline their operations.
 
 ## Installation
 
