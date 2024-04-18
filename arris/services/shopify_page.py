@@ -1,7 +1,11 @@
 import shopify
 import reflex as rx
 from arris.utils import ClientStorageState
-from arris.schemas.shopify_page import create_store_page, update_store_page, get_store_page_by_id
+from arris.schemas.shopify_page import (
+    create_store_page,
+    update_store_page,
+    get_store_page_by_id,
+)
 from arris.schemas.shopify_store import get_store
 from arris.schemas.shopify_page import get_store_page_by_page_id
 
@@ -63,7 +67,8 @@ class ShopifyPageService(ClientStorageState):
         except Exception as error:
             print("Create Page Error", error)
             return rx.window_alert("Error creating page")
-            
+
+
 def update_page(store_name: str, page_id: str, page_body: str):
     try:
         page_data = get_store_page_by_id(id=page_id)
@@ -95,6 +100,7 @@ def update_page(store_name: str, page_id: str, page_body: str):
         print("Update Page Error", error)
     finally:
         shopify.ShopifyResource.clear_session()
+
 
 def delete_page(store_name: str, page_id: str):
     try:
