@@ -26,16 +26,23 @@ Reflex uses Alembic for database migrations. To set up the database for this pro
 
 The project requires several environment variables to run correctly. You can find an example in the `.env.example` file. Copy this file to `.env` and fill in the appropriate values.
 
-### Setting Up a Shopify App
+## Setting Up a Shopify App
 
-1. Log in to your [Shopify Partners](https://partners.shopify.com/) account.
-2. Click on 'Apps' in the sidebar menu.
-3. Click on 'Create app' and then 'Create app manually'. Fill in the 'App name' and then create the app.
-4. After the app is created, you will be redirected to the app's overview page. Here, you can find the 'Client ID' and 'Client secret' under the 'Client credentials' section. These keys are needed for the Shopify integration in this project. Copy them and set the `SHOPIFY_API_KEY` and `SHOPIFY_API_SECRET_KEY` environment variables respectively in your .env file accordingly.
-5. Under the 'Configuration' section, fill in the 'Allowed redirection URL(s)' field with the redirect URI(s) and 'App URL' fields for your app. The App URL should be the URL where your app is hosted and Allowed redirection URL(s) is where Shopify will send users after they authorize the installation of your app. For this project, it would be `https://your-backend-domain/oauth/callback`.
-6. Click on 'Create app'.
+Follow these steps to set up a Shopify app:
 
-> **Note:** Please note that you need to replace `your-backend-domain` with the actual backend domain of your application. You can find this value in the `BE_DOMAIN` environment variable in your `.env` file.
+1. **Access Shopify Partners:** Log in to your [Shopify Partners](https://partners.shopify.com/) account.
+
+2. **Navigate to Apps:** Click on 'Apps' in the sidebar menu.
+
+3. **Create a New App:** Click on 'Create app', then 'Create app manually'. Enter the 'App name' and click 'Create app'.
+
+4. **Retrieve Client Credentials:** After the app is created, you'll be redirected to the app's overview page. Here, locate the 'Client ID' and 'Client secret' under the 'Client credentials' section. These keys are essential for the Shopify integration in this project. Copy them and set the `SHOPIFY_API_KEY` and `SHOPIFY_API_SECRET_KEY` environment variables in your .env file.
+
+5. **Configure App Settings:** In the 'Configuration' section, enter the 'Allowed redirection URL(s)' and 'App URL' for your app. The 'App URL' should be the URL where your app is hosted. The 'Allowed redirection URL(s)' is where Shopify will redirect users after they authorize your app's installation. For this project, use `https://your-backend-domain/oauth/callback`.
+
+6. **Finalize App Creation:** Click on 'Create app'.
+
+> **Note:** Replace `your-backend-domain` with your application's actual backend domain. You can find and set this value in the `BE_DOMAIN` environment variable in your .env file.
 
 ## Running the Application
 
