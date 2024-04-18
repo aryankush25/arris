@@ -1,26 +1,55 @@
-# Dashboard Template
+# Arris Dashboard
 
-This is a Reflex starter template for a dashboard app.
+This project is a Reflex-based dashboard application for managing Shopify stores. Reflex is a powerful, open-source platform for building web applications. It provides a user-friendly interface for store owners to manage their products and orders.
 
-## How to install
+## Installation
 
-1. Setup virtual environment
-2. Execute `pip install -r requirements.txt`
+Follow these steps to install the project:
 
-## How to setup database
+1. Install Reflex by running `pip install reflex`.
+2. Setup a virtual environment for Python.
+3. Install the required Python packages by running `pip install -r requirements.txt`.
 
-1. Create a new file in `/models`.
-2. Define the schema in the newly created file.
-3. Import that schema in `/models/__init__.py`.
-4. After making changes to the schema, use `reflex db makemigrations --message 'something changed'` to generate a script in the alembic/versions directory that will update the database schema. It is recommended that scripts be inspected before applying them.
-5. The `reflex db migrate` command is used to apply migration scripts to bring the database up to date. During app startup, if Reflex detects that the current database schema is not up to date, a warning will be displayed on the console.
+## Database Setup
 
-TODO:
-[ ]: Fallback pages in `arris/protected.py`
-[ ]: Send mail for email verification
-[ ]: Landing page
-[ ]: Login/Register page
-[ ]: Home page designs
-[ ]: Get all store and show on home page
-[ ]: Uninstall store
-[ ]: Create and modify theme in shopify
+Reflex uses Alembic for database migrations. To set up the database for this project:
+
+1. Create a new Python file in the `/models` directory.
+2. Define your database schema in the newly created file.
+3. Import the schema in `/models/__init__.py`.
+4. After making changes to the schema, use `reflex db makemigrations --message 'your change description'` to generate a migration script in the `alembic/versions` directory. This script will update the database schema. It is recommended to inspect these scripts before applying them.
+5. Use the `reflex db migrate` command to apply the migration scripts and bring the database up to date. If Reflex detects that the current database schema is not up to date during app startup, a warning will be displayed on the console.
+
+## Environment Variables
+
+The project requires several environment variables to run correctly. You can find an example in the `.env.example` file. Copy this file to `.env` and fill in the appropriate values.
+
+## Running the Application
+
+To run the application, use the `reflex run` command. This will start the Reflex application and serve it on a local web server.
+
+### Run the App in Development Mode
+
+Run it in development mode:
+
+```bash
+reflex run
+```
+
+Your app runs at <http://localhost:3000>.
+
+Reflex prints logs to the terminal. To increase log verbosity to help with debugging, use the --loglevel flag:
+
+```bash
+reflex run --loglevel debug
+```
+
+Reflex will hot reload any code changes in real time when running in development mode. Your code edits will show up on <http://localhost:3000> automatically.
+
+### Contributing
+
+Contributions to this project are welcome. Please ensure that any changes do not break existing functionality and that all code is properly formatted and documented.
+
+### License
+
+This project is licensed under the terms of the included LICENSE file.
